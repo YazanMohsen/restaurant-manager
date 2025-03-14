@@ -1,0 +1,5 @@
+.expand{
+  position: absolute;
+  top: -50px; /* Move the image up */
+  left: -50px; /* Move the image left */
+}
