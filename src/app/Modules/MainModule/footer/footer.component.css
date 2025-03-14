@@ -1,0 +1,6 @@
+
+.bg-dining {
+  background-size: cover;
+  background: rgba(0, 0, 0, 0.5) url("https://media.istockphoto.com/id/1045043934/photo/breakfast-in-a-cafe-food-lifestyle-concept.jpg?s=2048x2048&w=is&k=20&c=Ch_8biH7KMknOdIsVF6588Jk10SM-uB0dHQeq9N4eyM=") no-repeat center;
+  background-blend-mode: darken;
+}
