@@ -4,14 +4,26 @@
       <h5> Welcome to <span class="text-orange">Restaurant<strong>Manager</strong></span></h5>
 
     </div>
-    <div class="col-3">
+    <div class="col-4">
       <ul class="nav nav-bar row justify-content-between">
         <li class="col-2 p-0"><a>Home</a></li>
-        <li class="col-3 p-0"><a>Contact Us</a></li>
-        <li class="col-3 p-0"><a>About Us</a></li>
-        <li class="col-3 p-0"><a>Sign Out</a></li>
+        <li class="col-2 p-0"><a>Contact Us</a></li>
+        <li class="col-2 p-0"><a>About Us</a></li>
+        <li class="col-2  dropdown">
+          <button class="btn pt-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-home text-black"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item">Profile</a>
+            <a class="dropdown-item">Cart</a>
+            <a class="dropdown-item">Orders </a>
+            <a class="dropdown-item">Sign Out </a>
+          </div>
+        </li>
       </ul>
     </div>
+
   </div>
 
 </header>
