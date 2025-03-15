@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RestaurantModel} from "../restaurant.model";
+import {RestaurantService} from "../restaurant-service";
 
 @Component({
   selector: 'app-restaurant-list',
   templateUrl: './restaurant-list.component.html',
   styleUrl: './restaurant-list.component.css'
 })
-export class RestaurantListComponent {
+export class RestaurantListComponent implements OnInit {
+  constructor(private restaurantService: RestaurantService) {
+  }
+
+  restaurants: RestaurantModel[] = []
+
+  ngOnInit(): void {
+    this.restaurants = this.restaurantService.getRestaurants()
+  }
+
 
 }

@@ -1,1 +1,60 @@
-<p>restaurant works!</p>
+<div class="row w-100 justify-content-center">
+  <div class="col-7 p-4 m-4 shadow">
+    <h3 class="text-secondary pointer"
+        routerLink="/restaurants/all"
+    ><i class="bi bi-chevron-left fa-xs"></i>Go Back</h3>
+    <hr class="hr-orange">
+    <img [src]="restaurant.image" alt="" width="100%" height="400">
+    <h3 class="text-secondary mt-2">{{restaurant.name}}</h3>
+    <hr class="hr-orange">
+    <div class="row">
+      <div class="col-6">
+        <div class=""><i class="fa fa-location text-orange"></i> {{restaurant.location}} |
+          <a href="#" class="fa-bolder text-dark fs-bold"><i class="bi bi-send-arrow-up-fill text-orange"></i> Get
+            Direction</a>
+        </div>
+        <div class="mt-2"><i class="fa fa-clock text-orange"></i>  {{restaurant.time}}</div>
+        <div class="mt-2  pointer"><i class="bi bi-journal text-orange"></i> Show Menu</div>
+      </div>
+      <div class="col-6 row">
+        <i class="col-1 bi bi-list text-orange"></i>
+        <p class="col-11 "> {{restaurant.description}}</p>
+      </div>
+    </div>
+    <div class="row justify-content-around ">
+
+      <button class="col-2 btn btn-secondary bg-white text-secondary">
+        <i class="bi bi-calendar text-orange"></i>
+        Date
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <button class="col-2 btn btn-secondary bg-white text-secondary">
+        <i class="bi bi-clock text-orange"></i>
+        Time
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <button class="col-2 btn btn-secondary bg-white text-secondary">
+        <i class="bi bi-people text-orange"></i>
+        People
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <label class="col-1"><input type="radio" name="slot"> In</label>
+      <label class="col-2"><input type="radio" name="slot"> Out</label>
+
+      <button class="col-2 btn btn-warning bg-orange text-white ">Find Slot</button>
+    </div>
+  </div>
+  <div class="col-3 p-4 m-4 shadow ">
+    <h3 class=" col-8 text-secondary mt-2">Special Dishes </h3>
+    <hr class="base-class hr-orange">
+    <div class="row align-items-center" *ngFor="let i of [].constructor(4) ">
+      <img class="col-6 rounded-circle shadow p-2" src="https://bing.com/th?id=OSK.b5583dbe95c0f79b4bfd67483d07c297">
+      <div class="col-6">
+        <h5>Fried Fish</h5>
+        <p class=" "> Fresh fish,Salt ,black pepper,Lemon juice ,Garlic ,Flour, Eggs Spices , Cooking oil </p>
+      </div>
+    </div>
+  </div>
+
+
+</div>

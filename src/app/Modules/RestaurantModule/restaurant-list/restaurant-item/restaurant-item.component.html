@@ -1,0 +1,8 @@
+<div class="card shadow pointer" [routerLink]="'/restaurants/'+id">
+  <img width="300" height="300" class="card-img-top" [src]="restaurant.image" alt="">
+  <div class="card-body">
+    <h5 class="text-secondary">{{restaurant.name}}</h5>
+    <p>{{restaurant.location}}</p>
+    <p>{{restaurant.time}}</p>
+  </div>
+</div>

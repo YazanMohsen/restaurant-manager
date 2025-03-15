@@ -6,13 +6,14 @@
     </div>
     <div class="col-4">
       <ul class="nav nav-bar row justify-content-between">
-        <li class="col-2 p-0"><a>Home</a></li>
-        <li class="col-2 p-0"><a>Contact Us</a></li>
-        <li class="col-2 p-0"><a>About Us</a></li>
+        <li routerLink="/"                routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class=" pointer col-1 p-0  text-center"><a>Home</a></li>
+          <li routerLink="/restaurants/all" routerLinkActive="active" class=" pointer col-2  text-center p-0"><a>Restaurants</a></li>
+        <li routerLink="/contact-us" routerLinkActive="active" class="col-2 pointer  text-center p-0"><a>Contact Us</a></li>
+        <li routerLink="/about-us" routerLinkActive="active" class="col-2 pointer text-center p-0"><a>About Us</a></li>
         <li class="col-2  dropdown">
           <button class="btn pt-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-home text-black"></i>
+            <i class="bi bi-person"></i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item">Profile</a>
