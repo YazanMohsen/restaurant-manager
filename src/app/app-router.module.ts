@@ -14,6 +14,14 @@ let appRoutes: Route[] = [
   {
     path: "restaurants",
     loadChildren: () => import('./Modules/RestaurantModule/restaurant-router.module').then(m => m.RestaurantRouterModule)
+  },
+ {
+    path: "auth",
+    loadChildren: () => import('./Modules/AuthModule/auth-router.module').then(m => m.AuthRouterModule)
+  },
+ {
+    path: "user",
+    loadChildren: () => import('./Modules/UserModule/user-router.module').then(m => m.UserRouterModule)
   }
 
 ];

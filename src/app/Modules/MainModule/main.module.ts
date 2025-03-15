@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MainRouterModule} from "./main-router.module";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { FAQsComponent } from './faqs/faqs.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     HomeComponent,
     ContactUsComponent,
     AboutUsComponent,
+    FAQsComponent,
   ],
   imports: [
     BrowserModule,

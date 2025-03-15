@@ -1,0 +1,26 @@
+<form class="row  m-5 shadow " (ngSubmit)="OnSubmit(signInForm.value)" #signInForm="ngForm">
+  <div class="col-4 p-5 d-flex flex-column  justify-content-between">
+    <h1 class="text-center">Member Login</h1>
+    <div class="mb-3 input-group">
+      <span class="input-group-text border-0 bg-transparent"><i class="bi bi-person"></i></span>
+      <input type="text" class="form-control border-top-0 border-right-0 border-left-0 " placeholder="Email" ngModel email required>
+    </div>
+    <div class="mb-3 input-group">
+      <span class="input-group-text border-0 bg-transparent"><i class="bi bi-key"></i></span>
+      <input type="password" class="form-control border-top-0 border-right-0 border-left-0 " placeholder="Password" required>
+    </div>
+    <div class="mb-3 text-center ">
+      <button class="btn btn-primary pr-4 pl-4 " type="submit" [disabled]="signInForm.invalid">Sign In</button>
+    </div>
+    <div class="mb-3 row">
+      <p>New to RestaurantManger? <a
+        routerLink="/auth/sign-up"
+        class="text-style-underline" type="button">Sign Up</a></p>
+    </div>
+  </div>
+  <div class="col-8  p-0">
+    <img [@fadeIn]
+      class="img-fluid"
+         src="https://cdn.pixabay.com/photo/2020/12/05/11/34/chef-5805674_1280.png">
+  </div>
+</form>

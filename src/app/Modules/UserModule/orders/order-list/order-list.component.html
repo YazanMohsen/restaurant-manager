@@ -1,0 +1,25 @@
+<div class="">
+  <div class="m-5">
+    <h1 class="w-100">Orders </h1>
+    <table class="shadow table table-striped bg-orange ">
+      <thead class="text-white text-center ">
+      <th scope="col">Order Number</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Order Status</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Details</th>
+      </thead>
+      <tbody class="text-center">
+      <tr *ngFor="let i of [].constructor(2)">
+        <th class="align-middle" scope="row">1</th>
+        <td class="align-middle">20-05-2024 10:20AM</td>
+        <td class="align-middle" style="color: green">Submitted</td>
+        <td class="align-middle">200$</td>
+        <td class="align-middle"><a
+          routerLink="/user/orders/1"
+        >Show Details</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

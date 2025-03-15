@@ -1,0 +1,33 @@
+<div class="">
+  <div class="m-5">
+    <table class="shadow table table-striped bg-orange ">
+      <thead class="text-white text-center ">
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Count</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Action</th>
+      </thead>
+      <tbody class="text-center">
+      <tr *ngFor="let i of [].constructor(2)">
+        <th class="align-middle" scope="row">2</th>
+        <td><img width="150" height="150"
+                 class=" p-2" src="https://bing.com/th?id=OSK.b5583dbe95c0f79b4bfd67483d07c297"></td>
+        <td class="align-middle">2</td>
+        <td class="align-middle">100$</td>
+        <td class="align-middle">200$</td>
+        <td class="align-middle">
+          <div class="row m-2">
+            <button class=" col -2 btn btn-danger">Remove</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center p-2 w-100">
+    <button class="btn btn-warning border-0 bg-orange  text-white col-3 mr-3"> Submit Cart</button>
+    <button class="btn btn-danger  col-3">Clear</button>
+  </div>
+</div>

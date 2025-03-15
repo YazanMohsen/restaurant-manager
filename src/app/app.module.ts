@@ -6,6 +6,8 @@ import {MainModule} from "./Modules/MainModule/main.module";
 import {RestaurantModule} from "./Modules/RestaurantModule/restaurant.module";
 import {RouterOutlet} from "@angular/router";
 import {AppRouterModule} from "./app-router.module";
+import {AuthModule} from "./Modules/AuthModule/auth.module";
+import {UserModule} from "./Modules/UserModule/user.module";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import {AppRouterModule} from "./app-router.module";
     RouterOutlet,
     MainModule,
     RestaurantModule,
-    AppRouterModule
+    AppRouterModule,
+    AuthModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
