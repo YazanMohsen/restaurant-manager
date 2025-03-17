@@ -1,6 +1,6 @@
 <div class="">
   <div class="m-5">
-  <h3 >Order #0051506</h3>
+    <h3>Order {{order.id}}</h3>
     <table class="shadow table table-striped bg-orange ">
       <thead class="text-white text-center ">
       <th scope="col">#</th>
@@ -10,13 +10,13 @@
       <th scope="col">Total Price</th>
       </thead>
       <tbody class="text-center">
-      <tr *ngFor="let i of [].constructor(2)">
-        <th class="align-middle" scope="row">2</th>
+      <tr *ngFor="let item of order.orderItems">
+        <th class="align-middle" scope="row">{{item.id}}</th>
         <td><img width="150" height="150"
-                 class=" p-2" src="https://bing.com/th?id=OSK.b5583dbe95c0f79b4bfd67483d07c297"></td>
-        <td class="align-middle">2</td>
-        <td class="align-middle">100$</td>
-        <td class="align-middle">200$</td>
+                 class=" p-2" src="{{item.image}}"></td>
+        <td class="align-middle">{{item.count}}</td>
+        <td class="align-middle">{{item.price}}$</td>
+        <td class="align-middle">{{item.count * item.price}}$</td>
 
       </tr>
       </tbody>

@@ -1,4 +1,11 @@
 <div class="">
+  <div *ngIf="orders.length==0;else ordersView">
+    <div class=" p-5 m-5 text-center ">
+      <h3>You haven't ordered anything yet. Let’s change that!</h3>
+      <button class="btn btn-dark border-0 bg-orange text-white" routerLink="/user/cart">Start Your First Order</button>
+    </div>
+  </div>
+  <ng-template #ordersView>
   <div class="m-5">
     <h1 class="w-100">Orders </h1>
     <table class="shadow table table-striped bg-orange ">
@@ -10,16 +17,18 @@
       <th scope="col">Details</th>
       </thead>
       <tbody class="text-center">
-      <tr *ngFor="let i of [].constructor(2)">
-        <th class="align-middle" scope="row">1</th>
-        <td class="align-middle">20-05-2024 10:20AM</td>
-        <td class="align-middle" style="color: green">Submitted</td>
-        <td class="align-middle">200$</td>
+      <tr *ngFor="let order of orders ">
+        <th class="align-middle" scope="row">{{order.id}}</th>
+        <td class="align-middle">{{order.date | date}}</td>
+        <td class="align-middle {{order.status}}">{{order.status}}</td>
+        <td class="align-middle">{{order.totalPrice}}$</td>
         <td class="align-middle"><a
-          routerLink="/user/orders/1"
+          routerLink="/user/orders/{{order.id}}"
         >Show Details</a></td>
       </tr>
       </tbody>
     </table>
   </div>
+  </ng-template>
+
 </div>

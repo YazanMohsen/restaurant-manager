@@ -1,33 +1,46 @@
 <div class="">
-  <div class="m-5">
-    <table class="shadow table table-striped bg-orange ">
-      <thead class="text-white text-center ">
-      <th scope="col">#</th>
-      <th scope="col">Image</th>
-      <th scope="col">Count</th>
-      <th scope="col">Unit Price</th>
-      <th scope="col">Total Price</th>
-      <th scope="col">Action</th>
-      </thead>
-      <tbody class="text-center">
-      <tr *ngFor="let i of [].constructor(2)">
-        <th class="align-middle" scope="row">2</th>
-        <td><img width="150" height="150"
-                 class=" p-2" src="https://bing.com/th?id=OSK.b5583dbe95c0f79b4bfd67483d07c297"></td>
-        <td class="align-middle">2</td>
-        <td class="align-middle">100$</td>
-        <td class="align-middle">200$</td>
-        <td class="align-middle">
-          <div class="row m-2">
-            <button class=" col -2 btn btn-danger">Remove</button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <div *ngIf="cartItems.length==0;else cart">
+    <div class=" p-5 m-5 text-center ">
+      <h3>Your cart is feeling lonely! Add some delicious items to it</h3>
+      <button class="btn btn-dark border-0 bg-orange text-white" routerLink="/restaurants/all">Browse Menu</button>
+    </div>
   </div>
-  <div class="row justify-content-center p-2 w-100">
-    <button class="btn btn-warning border-0 bg-orange  text-white col-3 mr-3"> Submit Cart</button>
-    <button class="btn btn-danger  col-3">Clear</button>
-  </div>
+  <ng-template #cart>
+    <div class="m-5">
+      <table class="shadow table table-striped bg-orange ">
+        <thead class="text-white text-center ">
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Count</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Action</th>
+        </thead>
+        <tbody class="text-center">
+        <!--      <tr *ngFor="let i of [].constructor(2)">-->
+        <tr *ngFor="let cartItem of cartItems;let id=index">
+          <th class="align-middle" scope="row">{{cartItem.id}}</th>
+          <td><img width="150" height="150"
+                   class=" p-2" [src]="cartItem.image"></td>
+          <td class="align-middle">{{cartItem.count}}</td>
+          <td class="align-middle">{{cartItem.price}}$</td>
+          <td class="align-middle">{{cartItem.price * cartItem.count}}$</td>
+          <td class="align-middle">
+            <div class="row m-2">
+              <button class=" col -2 btn btn-danger" (click)="onRemove(id)">Remove</button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <h3>Total price</h3>
+      <h6>{{totalPrice}}</h6>
+    </div>
+    <div class="row justify-content-center p-2 w-100">
+      <button class="btn btn-warning border-0 bg-orange text-white col-3 mr-3" (click)="onSubmit()"> Submit Cart</button>
+      <button class="btn btn-danger col-3">Clear</button>
+    </div>
+  </ng-template>
 </div>

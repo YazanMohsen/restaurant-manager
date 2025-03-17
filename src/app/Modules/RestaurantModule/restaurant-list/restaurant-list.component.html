@@ -3,8 +3,17 @@
   <hr class="bg-orange opacity-100" style="height: 1px">
 
   <div class="row">
-    <app-restaurant-item class="col-s-1 col-md-4 mb-5" *ngFor="let restaurant of restaurants;let id = index"
-                         [restaurant]="restaurant" [id]="id">
-    </app-restaurant-item>
+    <div
+      class="col-s-1 col-md-4 mb-5 " *ngFor="let restaurant of restaurants;">
+      <div class="card shadow pointer"
+        [routerLink]="'/restaurants/'+restaurant.id">
+        <img width="300" height="300" class="card-img-top" [src]="restaurant.image" alt="">
+        <div class="card-body">
+          <h5 class="text-secondary">{{restaurant.name}}</h5>
+          <p>{{restaurant.location}}</p>
+          <p>{{restaurant.time}}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

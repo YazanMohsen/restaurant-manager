@@ -3,16 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import {RestaurantListComponent} from "./restaurant-list/restaurant-list.component";
 import {RestaurantComponent} from "./restaurant/restaurant.component";
 import {RestaurantRouterModule} from "./restaurant-router.module";
-import { RestaurantItemComponent } from './restaurant-list/restaurant-item/restaurant-item.component';
 import { RestaurantMainComponent } from './restaurant-main/restaurant-main.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
-
     RestaurantListComponent,
     RestaurantComponent,
-    RestaurantItemComponent,
-    RestaurantMainComponent
+    RestaurantMainComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

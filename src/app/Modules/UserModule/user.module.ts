@@ -3,24 +3,21 @@ import {RouterModule} from "@angular/router";
 import { OrdersComponent } from './orders/orders.component';
 import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
-import {NgForOf} from "@angular/common";
 import {OrderListComponent} from "./orders/order-list/order-list.component";
 import {OrderComponent} from "./orders/order/order.component";
-import {OrderItemComponent} from "./orders/order-item/order-item.component";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   declarations: [
-
-        OrdersComponent,
+      OrdersComponent,
        CartComponent,
        ProfileComponent,
        OrderListComponent,
-       OrderItemComponent,
        OrderComponent
   ],
   imports: [
+    BrowserModule,
     RouterModule,
-    NgForOf,
   ],
   exports:[
   ]

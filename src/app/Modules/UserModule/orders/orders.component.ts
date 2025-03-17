@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {OrderModel} from "../../Models/order.model";
+import {OrderService} from "../../Services/order.service";
 
 @Component({
   selector: 'app-orders',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent {
+
 
 }
