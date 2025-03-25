@@ -1,53 +1,48 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrderService} from "../../Services/order.service";
-import {MealModel} from "../../Models/meal.model";
 import {OrderModel} from "../../Models/order.model";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CartComponent implements OnInit {
   constructor(private orderService: OrderService) {
   }
 
-  cartItems: MealModel[] = [];
-  totalPrice: number = 0;
-  cartItemsListener: Subscription;
+  cart: OrderModel;
+  isLoading: Boolean = true;
+
 
   ngOnInit(): void {
-    this.cartItems = this.orderService.getCartItems();
-    this.cartItems.forEach(item => this.totalPrice += item.price* item.count);
-    this.cartItemsListener = this.orderService.getCartItemsPublisher().subscribe(
-      (cartItems: MealModel[]) => {
-        this.cartItems = cartItems
-        this.cartItems.forEach(item => this.totalPrice += item.price * item.count)
+    this.isLoading = true;
+    this.orderService.getCart().subscribe(
+      (cart: OrderModel) => {
+        this.cart = cart
+        this.isLoading = false;
       }
     );
-
-  }
-
-  onRemove(id: number) {
-    this.orderService.remove(id);
-
   }
 
   onSubmit() {
-    const order: OrderModel = new OrderModel(
-      0,
-      new Date(),
-      "Submitted",
-      this.totalPrice
-      ,
-      this.cartItems
-    )
-    this.orderService.addOrder(order);
+    this.orderService.saveOrder();
+  }
+
+
+  onRemove(id: number) {
+    this.orderService.removeItem(id);
+  }
+
+
+  increaseCount(id: number) {
+    this.orderService.increaseCount(id);
 
   }
 
-  ngOnDestroy(): void {
-    // this.cartItemsListener.unsubscribe();
+  decreaseCount(id: number) {
+    this.orderService.decreaseCount(id);
+
   }
+
 }

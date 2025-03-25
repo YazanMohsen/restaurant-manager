@@ -5,6 +5,9 @@ export class MealModel {
     public image: string,
     public price: number,
     public description?: string,
-    public count?: number) {
+    public count?: number,
+    public total_price?: number,
+    public item_id?: number,
+  ) {
   }
 }

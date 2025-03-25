@@ -1,15 +1,17 @@
 <div class="">
-  <div *ngIf="cartItems.length==0;else cart">
+  <div *ngIf="cart.order_items.length==0 && !isLoading;else cartView">
     <div class=" p-5 m-5 text-center ">
       <h3>Your cart is feeling lonely! Add some delicious items to it</h3>
-      <button class="btn btn-dark border-0 bg-orange text-white" routerLink="/restaurants/all">Browse Menu</button>
+      <button class="btn btn-dark border-0 bg-orange text-white" routerLink="/restaurants/menu">Browse Menu</button>
     </div>
   </div>
-  <ng-template #cart>
+  <ng-template #cartView>
+
     <div class="m-5">
       <table class="shadow table table-striped bg-orange ">
         <thead class="text-white text-center ">
         <th scope="col">#</th>
+        <th scope="col">Name</th>
         <th scope="col">Image</th>
         <th scope="col">Count</th>
         <th scope="col">Unit Price</th>
@@ -18,13 +20,18 @@
         </thead>
         <tbody class="text-center">
         <!--      <tr *ngFor="let i of [].constructor(2)">-->
-        <tr *ngFor="let cartItem of cartItems;let id=index">
-          <th class="align-middle" scope="row">{{cartItem.id}}</th>
+        <tr *ngFor="let cartItem of cart.order_items;let id=index">
+          <th class="align-middle" scope="row">{{cartItem.item.id}}</th>
+          <th class="align-middle" scope="row">{{cartItem.item.name}}</th>
           <td><img width="150" height="150"
-                   class=" p-2" [src]="cartItem.image"></td>
-          <td class="align-middle">{{cartItem.count}}</td>
-          <td class="align-middle">{{cartItem.price}}$</td>
-          <td class="align-middle">{{cartItem.price * cartItem.count}}$</td>
+                   class=" p-2" [src]="cartItem.item.image"></td>
+          <td class="align-middle">
+            <i class="btn btn-info mr-3 fs-5 " (click)="increaseCount(id)">+</i>
+            {{cartItem.count}}
+            <i class="btn btn-info ml-3 fs-5" (click)="decreaseCount(id)">-</i>
+          </td>
+          <td class="align-middle">{{cartItem.item.price}} S.P</td>
+          <td class="align-middle">{{cartItem.price}} S.P</td>
           <td class="align-middle">
             <div class="row m-2">
               <button class=" col -2 btn btn-danger" (click)="onRemove(id)">Remove</button>
@@ -36,11 +43,10 @@
     </div>
     <div class="text-center">
       <h3>Total price</h3>
-      <h6>{{totalPrice}}</h6>
+      <h6>{{cart.total_price}}</h6>
     </div>
     <div class="row justify-content-center p-2 w-100">
-      <button class="btn btn-warning border-0 bg-orange text-white col-3 mr-3" (click)="onSubmit()"> Submit Cart</button>
-      <button class="btn btn-danger col-3">Clear</button>
+      <button class="btn btn-dark border-0 bg-orange text-white col-3 mr-3" (click)="onSubmit()"> Submit Cart</button>
     </div>
   </ng-template>
 </div>

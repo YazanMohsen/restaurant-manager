@@ -8,6 +8,7 @@ import {RouterOutlet} from "@angular/router";
 import {AppRouterModule} from "./app-router.module";
 import {AuthModule} from "./Modules/AuthModule/auth.module";
 import {UserModule} from "./Modules/UserModule/user.module";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {UserModule} from "./Modules/UserModule/user.module";
     RestaurantModule,
     AppRouterModule,
     AuthModule,
-    UserModule
+    UserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RestaurantModel} from "../../Models/restaurant.model";
 import {RestaurantService} from "../../Services/restaurant-service";
+import {ResponseModel} from "../../Models/response.model";
 
 @Component({
   selector: 'app-restaurant-list',
@@ -14,7 +15,11 @@ export class RestaurantListComponent implements OnInit {
   restaurants: RestaurantModel[] = []
 
   ngOnInit(): void {
-    this.restaurants = this.restaurantService.getRestaurants()
+    this.restaurantService.getRestaurants().subscribe(
+      (response: ResponseModel<RestaurantModel>) => {
+        this.restaurants = response.list;
+      }
+    )
   }
 
 

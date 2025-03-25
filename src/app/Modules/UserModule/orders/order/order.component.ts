@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {OrderModel} from "../../../Models/order.model";
 import {ActivatedRoute, Params} from "@angular/router";
 import {OrderService} from "../../../Services/order.service";
+import {ResponseModel} from "../../../Models/response.model";
 
 @Component({
   selector: 'app-order',
@@ -20,7 +21,11 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        this.order = this.orderService.getOrder(+params["id"])
+        this.orderService.getOrder(+params["id"]).subscribe((
+          (response: ResponseModel<OrderModel>) => {
+            this.order = response.model;
+          }
+        ))
       }
     )
   }
