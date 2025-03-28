@@ -71,7 +71,7 @@ export class RestaurantService {
   }
 
   getRestaurantMeals(restaurantId: number) {
-    return this.httpService.get('items/restaurant/'+restaurantId);
+    return this.httpService.get('items/restaurant/' + restaurantId);
   }
 
   // getRestaurantFood(number: number) {
@@ -81,4 +81,8 @@ export class RestaurantService {
   //     )
   //   ];
   // }
+  searchRestaurants(searchValue: string,page?:number,pageSize?:number) {
+    return this.httpService.get('restaurants/search', {name: searchValue,page:page+1,per_page:pageSize});
+
+  }
 }

@@ -13,15 +13,23 @@ export class HttpService {
   post(url: string, model: any) {
     return this.httpClient.post(this.serverURl + url, model);
   }
-  get(url: string) {
-    return this.httpClient.get(this.serverURl + url);
+
+  get(url: string, model?: {}) {
+    return this.httpClient.get(this.serverURl + url, {params: model});
   }
-  delete(url: string,id:number) {
-    return this.httpClient.delete(this.serverURl + url,{params:{"id":id}});
+
+  delete(url: string, id: number
+  ) {
+    return this.httpClient.delete(this.serverURl + url, {params: {"id": id}});
   }
 
 
-  put(url: string, model:any) {
+  put(url
+        :
+        string, model
+        :
+        any
+  ) {
     return this.httpClient.put(this.serverURl + url, model);
 
   }

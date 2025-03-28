@@ -27,5 +27,5 @@ let appRoutes: Route[] = [
     RouterModule
   ]
 })
-export class RestaurantRouterModule {
+export class  RestaurantRouterModule {
 }

@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import {OrderListComponent} from "./orders/order-list/order-list.component";
 import {OrderComponent} from "./orders/order/order.component";
 import {BrowserModule} from "@angular/platform-browser";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -15,10 +16,11 @@ import {BrowserModule} from "@angular/platform-browser";
        OrderListComponent,
        OrderComponent
   ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule,
+        MatProgressSpinner,
+    ],
   exports:[
   ]
 })

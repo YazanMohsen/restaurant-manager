@@ -1,4 +1,9 @@
 <div class="">
+
+  <div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading" >
   <div *ngIf="orders.length==0;else ordersView">
     <div class=" p-5 m-5 text-center ">
       <h3>You haven't ordered anything yet. Let’s change that!</h3>
@@ -31,4 +36,5 @@
   </div>
   </ng-template>
 
+</div>
 </div>

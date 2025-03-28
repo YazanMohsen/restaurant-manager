@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RestaurantService} from "../../Services/restaurant-service";
 import {MealModel} from "../../Models/meal.model";
 import {OrderService} from "../../Services/order.service";
 import {ResponseModel} from "../../Models/response.model";
 import {ActivatedRoute, Params} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit {
-  restaurantName: string;
+export class MenuComponent implements OnInit ,OnDestroy{
 
 
   constructor(
@@ -21,9 +21,19 @@ export class MenuComponent implements OnInit {
   ) {
   }
 
+  restaurantName: string;
   meals: MealModel[] = []
+  isLoading: boolean;
+  actionLoader: Boolean;
+  actionLoaderListener: Subscription;
 
   ngOnInit(): void {
+    this.actionLoaderListener= this.orderService.getLoaderPublisher().subscribe(
+      (loading) => {
+        this.actionLoader = loading;
+      }
+    )
+    this.isLoading = true;
     this.activatedRoute.queryParams.subscribe(
       (params: Params) => {
         const restaurantId = params['restaurantId'];
@@ -33,21 +43,28 @@ export class MenuComponent implements OnInit {
           this.restaurantService.getMeals().subscribe(
             (response: ResponseModel<MealModel>) => {
               this.meals = response.list;
+              this.isLoading = false;
             }
           )
         } else {
           this.restaurantService.getRestaurantMeals(restaurantId).subscribe(
             (response: ResponseModel<MealModel>) => {
               this.meals = response.list;
+              this.isLoading = false;
             }
           )
-          this.restaurantName=restaurantName;
+          this.restaurantName = restaurantName;
         }
       }
     )
   }
 
   addToCart(foodModel) {
-    this.orderService.addToCart({...foodModel, count: 1,item_id:foodModel.id,id:null})
+    this.orderService.getLoaderPublisher().next(true);
+    this.orderService.addToCart({...foodModel, count: 1, item_id: foodModel.id, id: null})
+  }
+
+  ngOnDestroy(): void {
+    this.actionLoaderListener.unsubscribe();
   }
 }

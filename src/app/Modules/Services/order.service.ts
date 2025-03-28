@@ -10,6 +10,7 @@ export class OrderService {
   orders: OrderModel[] = []
   cart: OrderModel;
   private cartPublisher: Subject<OrderModel> = new Subject<OrderModel>();
+  private loaderPublisher: Subject<Boolean> = new Subject<Boolean>();
 
   constructor(private httpService: HttpService) {
     this.cart = OrderModel.initCart();
@@ -23,6 +24,10 @@ export class OrderService {
   getCart() {
     this.initCart();
     return this.cartPublisher;
+  }
+
+  getLoaderPublisher() {
+    return this.loaderPublisher;
   }
 
 
@@ -63,12 +68,14 @@ export class OrderService {
   addOrder() {
     this.httpService.post('orders', this.cart).subscribe(() => {
       this.initCart()
+      this.loaderPublisher.next(false);
     })
   }
 
   updateOrder() {
     this.httpService.put('orders/' + this.cart.orderId, this.cart).subscribe(() => {
       this.initCart()
+      this.loaderPublisher.next(false);
     })
   }
 
@@ -80,6 +87,7 @@ export class OrderService {
   removeItem(id: number) {
     this.httpService.delete('order-items/' + this.cart.order_items[id].id, this.cart.order_items[id].id).subscribe(() => {
       this.initCart()
+      this.loaderPublisher.next(false);
     });
   }
 

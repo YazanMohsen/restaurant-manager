@@ -13,11 +13,14 @@ export class OrderListComponent implements OnInit {
   }
 
   orders: OrderModel[] = []
+  isLoading: boolean;
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.orderService.getOrders().subscribe((
       (response: ResponseModel<OrderModel>) => {
         this.orders = response.list;
+        this.isLoading = false;
       }
     ))
   }

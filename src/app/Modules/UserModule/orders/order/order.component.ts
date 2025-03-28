@@ -11,6 +11,7 @@ import {ResponseModel} from "../../../Models/response.model";
 })
 export class OrderComponent implements OnInit {
   order: OrderModel;
+  isLoading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,11 +20,13 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading=true;
     this.activatedRoute.params.subscribe(
       (params: Params) => {
         this.orderService.getOrder(+params["id"]).subscribe((
           (response: ResponseModel<OrderModel>) => {
             this.order = response.model;
+            this.isLoading=false;
           }
         ))
       }

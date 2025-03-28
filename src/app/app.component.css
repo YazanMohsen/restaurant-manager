@@ -37,4 +37,6 @@ body,html {
 .active{
   border-bottom: 1px solid var(--app-orange);
 }
-
+mat-spinner circle {
+  stroke:var(--app-orange);
+}
