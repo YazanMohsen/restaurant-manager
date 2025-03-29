@@ -1,0 +1,28 @@
+<div class="">
+  <div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div  *ngIf="!isLoading" >
+    <table class="shadow table table-striped bg-orange  table-dark ">
+      <thead class="text-white text-center thead-light ">
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col" class="w-25">Description</th>
+      <th scope="col">Image</th>
+      <th scope="col">Price</th>
+      </thead>
+      <tbody class="text-center">
+      <tr *ngFor="let meal of meals">
+        <th class="align-middle" scope="row">{{meal.id}}</th>
+        <th class="align-middle" scope="row">{{meal.name}}</th>
+        <td class="align-middle w-30">{{meal.description}}</td>
+        <td><img width="200" height="150"
+                 class=" p-2" src="{{meal.image}}"></td>
+        <td class="align-middle">{{meal.price}} S.P</td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

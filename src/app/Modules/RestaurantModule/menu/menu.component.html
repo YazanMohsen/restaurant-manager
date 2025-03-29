@@ -13,7 +13,7 @@
           <div class="row align-items-center justify-content-between">
             <h5 class="col-6 text-orange">{{meal.name}}</h5>
             <h6 class="col-3 text-secondary">{{meal.price}} S.P</h6>
-            <button class="col-2 btn btn-success mr-4" (click)="addToCart(meal)" [disabled]="addToCartLoading"><i class="bi bi-cart"></i></button>
+            <button class="col-2 btn btn-success mr-4" (click)="addToCart(meal)" [disabled]="actionLoader"><i class="bi bi-cart"></i></button>
           </div>
           <div class=" row align-items-center justify-content-between">
             <p class="col-12 text-secondary">{{meal.description}} </p>

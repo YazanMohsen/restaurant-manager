@@ -1,0 +1,50 @@
+<div class="">
+
+  <div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div *ngIf="restaurants.length==0;else restaurantsView">
+      <div class=" p-5 m-5 text-center ">
+        <h3>No Restaurants yet</h3>
+      </div>
+    </div>
+    <ng-template #restaurantsView>
+      <table class="shadow table table-dark table-striped bg-orange m-0 p-0">
+        <thead class="text-white text-center  thead-light">
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col"class="w-25">Location</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col" class="w-25">Description</th>
+        <th scope="col">Profile Image</th>
+        <th scope="col">Cover Image</th>
+        </thead>
+        <tbody class="text-center">
+        <tr *ngFor="let restaurant of restaurants ">
+          <th class="align-middle" scope="row">{{restaurant.id}}</th>
+          <th class="align-middle" scope="row">{{restaurant.name}}</th>
+          <td class="align-middle  w-25">{{restaurant.location}}</td>
+          <td class="align-middle ">{{restaurant.mobile_number}}</td>
+          <td class="align-middle w-25">{{restaurant.description}} S.P</td>
+          <th class="align-middle" scope="row">
+            <img width="150" height="150" src="{{restaurant.profile_image}}">
+          </th>
+          <th class="align-middle" scope="row">
+            <img width="150" height="150" src="{{restaurant.cover_image}}">
+          </th>
+        </tr>
+        </tbody>
+      </table>
+
+
+    </ng-template>
+
+  </div>
+
+</div>
+<mat-paginator class="bg-dark"[length]="totalCount"
+               [pageSizeOptions]="[1, 5, 10]"
+               (page)="paginate($event)"
+               [pageSize]="pageSize"
+></mat-paginator>

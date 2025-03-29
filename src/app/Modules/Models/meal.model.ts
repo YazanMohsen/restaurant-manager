@@ -8,6 +8,7 @@ export class MealModel {
     public count?: number,
     public total_price?: number,
     public item_id?: number,
+    public restaurant_id?: number,
   ) {
   }
 }

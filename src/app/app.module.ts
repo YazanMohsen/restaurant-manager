@@ -8,7 +8,8 @@ import {RouterOutlet} from "@angular/router";
 import {AppRouterModule} from "./app-router.module";
 import {AuthModule} from "./Modules/AuthModule/auth.module";
 import {UserModule} from "./Modules/UserModule/user.module";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
+import {AdminModule} from "./Modules/AdminModule/admin.module";
 
 @NgModule({
   declarations: [
@@ -18,11 +19,12 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     BrowserModule,
     RouterOutlet,
     MainModule,
+    AdminModule,
     RestaurantModule,
     AppRouterModule,
     AuthModule,
     UserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

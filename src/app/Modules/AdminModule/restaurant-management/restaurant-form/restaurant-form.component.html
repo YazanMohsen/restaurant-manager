@@ -1,0 +1,46 @@
+<form
+  #RestaurantForm="ngForm"
+  (ngSubmit)="onSubmit(RestaurantForm.value)"
+  class="form-controller bg-dark text-white shadow  p-5  d-flex flex-column  justify-content-between ">
+  <h4 class="text-center ">Add Restaurant Details</h4>
+
+  <div class="mb-4">
+    <label class="d-block">Name </label>
+    <input class="w-100 shadow" required name="name" ngModel required>
+  </div>
+  <div  class="mb-4 ">
+    <label class="d-block">Description</label>
+    <textarea class="w-100 shadow" name="description" ngModel required></textarea>
+  </div>
+  <div  class="mb-4 ">
+    <label class="d-block">Mobile Number</label>
+    <input class="w-25 shadow" name="mobile_number" ngModel required>
+  </div>
+  <div  class="mb-4">
+    <label class="d-block">Location </label>
+    <input class="w-25 shadow" name="location" ngModel required>
+  </div>
+  <div class="row justify-content-around">
+    <div class=" mt-4 position-relative col-4 d-inline-block" >
+      <img    class=" shadow " src="https://th.bing.com/th/id/OIP.gA3nfmBqf-OlltfChubQTwHaE8?rs=1&pid=ImgDetMain"  width="400" height="300" >
+      <label for="profile_image" class="position-relative  position-absolute bottom-0  m-0 w-100 gradient-input  " >
+        <input type="file" class="d-none" name="profile_image" ngModel id="profile_image" required>
+        <p  class=" position-absolute  top-50 start-50  translate-middle m-0 text-white bg-orange p-2 " >Upload Profile Image</p>
+      </label>
+    </div>
+  <div class=" mt-4 position-relative col-4 d-inline-block" >
+    <img  class=" shadow "src="https://th.bing.com/th/id/OIP.gA3nfmBqf-OlltfChubQTwHaE8?rs=1&pid=ImgDetMain"  width="400" height="300" >
+    <label  for="cover_image" class="position-relative  position-absolute bottom-0   m-0 w-100 gradient-input  " >
+      <input type="file" class="d-none" name="cover_image" id="cover_image" ngModel required>
+     <p class=" position-absolute  top-50 start-50  translate-middle m-0 text-white text-white bg-orange p-2" >Upload Cover Image</p>
+    </label>
+  </div>
+  </div>
+
+  <button
+    [disabled]="!RestaurantForm.valid"
+    type="submit"
+    class="btn btn-primary m-4 w-25 text-center align-self-center">
+    Request Register
+  </button>
+</form>

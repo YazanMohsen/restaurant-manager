@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {RestaurantModel} from "../../Models/restaurant.model";
-import {RestaurantService} from "../../Services/restaurant-service";
-import {ResponseModel} from "../../Models/response.model";
+import {ResponseModel} from "../../../Models/response.model";
+import {RestaurantModel} from "../../../Models/restaurant.model";
+import {RestaurantService} from "../../../Services/restaurant-service";
 import {PageEvent} from "@angular/material/paginator";
 
 @Component({
-  selector: 'app-restaurant-list',
-  templateUrl: './restaurant-list.component.html',
-  styleUrl: './restaurant-list.component.css'
+  selector: 'app-restaurant-management',
+  templateUrl: './restaurant-management.component.html',
+  styleUrl: './restaurant-management.component.css'
 })
-export class RestaurantListComponent implements OnInit {
+export class RestaurantManagementComponent implements OnInit {
   constructor(private restaurantService: RestaurantService) {
   }
 
@@ -18,15 +18,6 @@ export class RestaurantListComponent implements OnInit {
   totalCount: number;
   pageSize: number = 5;
   isLoading: boolean;
-
-  ngOnInit(): void {
-    this.search(0, this.pageSize);
-  }
-
-  paginate(event: PageEvent) {
-    this.search(event.pageIndex, event.pageSize);
-
-  }
 
   search(page?: number, pageSize?: number) {
     this.isLoading = true;
@@ -39,5 +30,12 @@ export class RestaurantListComponent implements OnInit {
     )
   }
 
+  ngOnInit(): void {
+    this.search(0, this.pageSize);
+  }
+  paginate(event: PageEvent) {
+    this.search(event.pageIndex, event.pageSize);
+
+  }
 
 }

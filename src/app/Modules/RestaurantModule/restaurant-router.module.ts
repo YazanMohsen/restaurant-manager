@@ -11,8 +11,7 @@ let appRoutes: Route[] = [
     children: [
       {path: 'all', component: RestaurantListComponent,},
       {path: 'menu', component: MenuComponent},
-      {path: ':id', component: RestaurantComponent,
-      },
+      {path: ':id', component: RestaurantComponent,},
     ]
   },
 

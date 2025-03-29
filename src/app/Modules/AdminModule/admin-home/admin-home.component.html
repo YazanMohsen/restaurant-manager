@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+          <li class="nav-item">
+            <a
+              routerLinkActive="active"
+              routerLink="/admin/restaurant-manage" class="nav-link align-middle px-0 text-white">
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#submenu1"
+               data-bs-toggle="collapse"
+               data-bs-auto-close="true"
+               class="nav-link px-0 align-middle text-white">
+
+              <i class="fs-4 bi-cake"></i> <span class="ms-1 d-none d-sm-inline">Meals</span> </a>
+            <ul class="collapse nav flex-column show ms-1" id="submenu1" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="meals/add" class="nav-link text-white p-2"> <span
+                  class="d-none d-sm-inline">Add Meal</span> </a>
+              </li>
+              <li>
+                <a routerLink="meals/all" class="nav-link text-white  p-2"> <span
+                  class="d-none d-sm-inline">My Meals</span> </a>
+              </li>
+            </ul>
+
+          </li>
+          <li>
+            <a routerLink="orders/all" class="nav-link px-0 align-middle text-white">
+              <i class="fs-5  bi-archive"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+          </li>
+            <li>
+              <a routerLink="reservations" class="nav-link px-0 align-middle text-white">
+                <i class="fs-5 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Reservations</span></a>
+            </li>
+
+          <li>
+            <a href="#submenu2"
+               data-bs-toggle="collapse"
+               data-bs-auto-close="true"
+               class="nav-link px-0 align-middle text-white">
+
+              <i class="fs-5 bi-buildings"></i> <span class="ms-1 d-none d-sm-inline">Restaurants</span> </a>
+            <ul class="collapse nav flex-column show ms-1" id="submenu2" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="restaurants/add" class="nav-link text-white p-2">    <i class="fs-5 bi-building-add"></i> <span class="ms-1 d-none d-sm-inline">Add Restaurant</span>
+                </a>
+              </li>
+              <li>
+                <a routerLink="restaurants/all" class="nav-link text-white  p-2">   <i class="fs-5 bi-building"></i><span class="d-none d-sm-inline">Restaurants</span>
+                </a>
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="col m-0 p-0">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
