@@ -8,6 +8,8 @@ export class RestaurantModel {
               public location,
               public mobile_number,
               public time,
-              public description?: MealModel[]) {
+              public description?,
+              public status?
+  ) {
   }
 }

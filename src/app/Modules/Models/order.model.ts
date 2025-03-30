@@ -7,8 +7,9 @@ export class OrderModel {
               public count: number,
               public total_price: number,
               public order_items: MealModel[],
-              public orderId?: string,
+              public orderId?: number,
               public created_at?: string,
+              public id?: number,
   ) {
   }
 

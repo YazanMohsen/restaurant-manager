@@ -53,7 +53,7 @@ export class OrderService {
     let item = this.cart.order_items.filter((item) => cartItem.item_id == item.item_id)[0];
     if (item) {
       item.count++;
-      this.updateOrder();
+      this.updateOrder(this.cart.orderId, this.cart);
       return
     }
     this.cart.order_items.push(cartItem);
@@ -62,7 +62,10 @@ export class OrderService {
     if (!this.cart.orderId)
       this.addOrder();
     else
-      this.updateOrder()
+      this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
+        this.initCart()
+        this.loaderPublisher.next(false);
+      })
   }
 
   addOrder() {
@@ -72,20 +75,20 @@ export class OrderService {
     })
   }
 
-  updateOrder() {
-    this.httpService.put('orders/' + this.cart.orderId, this.cart).subscribe(() => {
+  updateOrder(id: number, order: OrderModel) {
+    return this.httpService.put('orders/' + id, order);
+  }
+
+  saveOrder() {
+    this.cart.status = OrderStatus.Pending;
+    this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
       this.initCart()
       this.loaderPublisher.next(false);
     })
   }
 
-  saveOrder() {
-    this.cart.status = OrderStatus.Pending;
-    this.updateOrder();
-  }
-
   removeItem(id: number) {
-    this.httpService.delete('order-items/' + this.cart.order_items[id].id, this.cart.order_items[id].id).subscribe(() => {
+    this.httpService.delete('order-items/' ,this.cart.order_items[id].id).subscribe(() => {
       this.initCart()
       this.loaderPublisher.next(false);
     });
@@ -95,15 +98,24 @@ export class OrderService {
   increaseCount(id: number) {
     let cartItem: MealModel = this.cart.order_items[id];
     cartItem.count++;
-    this.updateOrder();
+    this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
+      this.initCart()
+      this.loaderPublisher.next(false);
+    })
   }
 
   decreaseCount(id: number) {
     let cartItem: MealModel = this.cart.order_items[id];
     if (cartItem.count == 1) return;
     cartItem.count--;
-    this.updateOrder();
+    this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
+      this.initCart()
+      this.loaderPublisher.next(false);
+    })
   }
 
 
+  searchOrders(searchValue: string, page: number, pageSize: number) {
+    return this.getOrders();
+  }
 }

@@ -4,25 +4,39 @@
   </div>
 
   <div  *ngIf="!isLoading" >
-    <table class="shadow table table-striped bg-orange  table-dark ">
-      <thead class="text-white text-center thead-light ">
+    <table class="shadow table table-striped  ">
+      <thead class="text-white text-center   bg-orange">
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col" class="w-25">Description</th>
       <th scope="col">Image</th>
       <th scope="col">Price</th>
+      <th scope="col"></th>
       </thead>
       <tbody class="text-center">
       <tr *ngFor="let meal of meals">
         <th class="align-middle" scope="row">{{meal.id}}</th>
-        <th class="align-middle" scope="row">{{meal.name}}</th>
+        <th class="align-middle" scope="row">
+          {{meal.name}}
+          </th>
         <td class="align-middle w-30">{{meal.description}}</td>
         <td><img width="200" height="150"
                  class=" p-2" src="{{meal.image}}"></td>
         <td class="align-middle">{{meal.price}} S.P</td>
+        <td class="align-middle"><button
+          routerLink="../add"
+          [queryParams]="{id:meal.id}"
+          class="btn btn-secondary">Update</button></td>
 
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<mat-paginator class="bg-dark"[length]="totalCount"
+               [pageSizeOptions]="[1, 5, 10]"
+               (page)="paginate($event)"
+               [pageSize]="pageSize"
+></mat-paginator>
+

@@ -1,6 +1,7 @@
 * {
   --app-orange:#F49B33;
   --app-red:#FF6633;
+  --app-green:#00AA00;
 }
 
 
@@ -12,7 +13,9 @@
 }
 .text-red {
   color:  var(--app-red);
-
+}
+.text-green{
+  color:  var(--app-green);
 }
 .bg-orange {
   background-color: var(--app-orange);

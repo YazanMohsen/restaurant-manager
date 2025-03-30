@@ -33,9 +33,26 @@ export class RestaurantManagementComponent implements OnInit {
   ngOnInit(): void {
     this.search(0, this.pageSize);
   }
+
   paginate(event: PageEvent) {
     this.search(event.pageIndex, event.pageSize);
 
   }
 
+  reject(restaurant: RestaurantModel) {
+    this.restaurantService.delete(restaurant.id).subscribe(
+      () => {
+        this.search(0, this.pageSize);
+      }
+    )
+  }
+
+  approve(restaurant: RestaurantModel) {
+    restaurant.status='Approved';
+    this.restaurantService.update(restaurant).subscribe(
+      () => {
+        this.search(0, this.pageSize);
+      }
+    )
+  }
 }

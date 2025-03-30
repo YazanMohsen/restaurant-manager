@@ -5,7 +5,7 @@ import {OrderModel} from "../Models/order.model";
 
 @Injectable({providedIn: "root"})
 export class HttpService {
-  serverURl: string = environment.serverURL;
+  serverURl: string = environment.serverURL + 'api/';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -18,18 +18,12 @@ export class HttpService {
     return this.httpClient.get(this.serverURl + url, {params: model});
   }
 
-  delete(url: string, id: number
-  ) {
-    return this.httpClient.delete(this.serverURl + url, {params: {"id": id}});
+  delete(url: string, id: number) {
+    return this.httpClient.delete(this.serverURl + url+'/'+id);
   }
 
 
-  put(url
-        :
-        string, model
-        :
-        any
-  ) {
+  put(url: string, model: any) {
     return this.httpClient.put(this.serverURl + url, model);
 
   }
