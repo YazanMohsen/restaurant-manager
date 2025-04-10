@@ -1,8 +1,6 @@
 import {RestaurantModel} from "../Models/restaurant.model";
 import {Injectable} from "@angular/core";
-import {MealModel} from "../Models/meal.model";
 import {HttpService} from "./http.service";
-import {ResponseModel} from "../Models/response.model";
 
 @Injectable({providedIn: "root"})
 export class RestaurantService {
@@ -31,8 +29,12 @@ export class RestaurantService {
 
   }
 
-  searchMeals(searchValue: string, page: number, pageSize: number) {
-    return this.getMeals();
+  searchMeals(searchValue: string, page: number, pageSize: number, restaurantId?: number) {
+    let searchBody = {name: searchValue, page: page + 1, per_page: pageSize}
+    if (restaurantId)
+      searchBody['restaurant_id'] = restaurantId;
+    return this.httpService.get('items/search', searchBody);
+    // return this.getMeals();
   }
 
   delete(id) {

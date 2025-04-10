@@ -10,7 +10,7 @@
               <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
             </a>
           </li>
-          <li>
+          <li *ngIf="isRestaurantAdmin()">
             <a href="#submenu1"
                data-bs-toggle="collapse"
                data-bs-auto-close="true"
@@ -29,33 +29,37 @@
             </ul>
 
           </li>
-          <li>
+          <li *ngIf="isRestaurantAdmin()">
             <a routerLink="orders/all" class="nav-link px-0 align-middle text-white">
               <i class="fs-5  bi-archive"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
           </li>
-            <li>
+          <li *ngIf="isRestaurantAdmin()">
               <a routerLink="reservations" class="nav-link px-0 align-middle text-white">
                 <i class="fs-5 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Reservations</span></a>
             </li>
 
-          <li>
-            <a href="#submenu2"
-               data-bs-toggle="collapse"
-               data-bs-auto-close="true"
-               class="nav-link px-0 align-middle text-white">
+<!--          <li>-->
+<!--            <a href="#submenu2"-->
+<!--               data-bs-toggle="collapse"-->
+<!--               data-bs-auto-close="true"-->
+<!--               class="nav-link px-0 align-middle text-white">-->
 
-              <i class="fs-5 bi-buildings"></i> <span class="ms-1 d-none d-sm-inline">Restaurants</span> </a>
-            <ul class="collapse nav flex-column show ms-1" id="submenu2" data-bs-parent="#menu">
-              <li class="w-100">
-                <a routerLink="restaurants/add" class="nav-link text-white p-2">    <i class="fs-5 bi-building-add"></i> <span class="ms-1 d-none d-sm-inline">Add Restaurant</span>
-                </a>
-              </li>
-              <li>
-                <a routerLink="restaurants/all" class="nav-link text-white  p-2">   <i class="fs-5 bi-building"></i><span class="d-none d-sm-inline">Restaurants</span>
-                </a>
-              </li>
-            </ul>
+<!--              <i class="fs-5 bi-buildings"></i> <span class="ms-1 d-none d-sm-inline">Restaurants</span> </a>-->
+<!--            <ul class="collapse nav flex-column show ms-1" id="submenu2" data-bs-parent="#menu">-->
+<!--              <li class="w-100">-->
+<!--                <a routerLink="restaurants/add" class="nav-link text-white p-2">    <i class="fs-5 bi-building-add"></i> <span class="ms-1 d-none d-sm-inline">Add Restaurant</span>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--              <li>-->
+<!--                <a routerLink="restaurants/all" class="nav-link text-white  p-2">   <i class="fs-5 bi-building"></i><span class="d-none d-sm-inline">Restaurants</span>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--            </ul>-->
 
+<!--          </li>-->
+          <li *ngIf="isSystemAdmin()">
+            <a routerLink="restaurants/all" class="nav-link px-0 align-middle text-white">
+              <i class="fs-5 bi-building"></i> <span class="ms-1 d-none d-sm-inline">Restaurants</span></a>
           </li>
         </ul>
 

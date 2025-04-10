@@ -13,6 +13,7 @@ import {MealModel} from "../../Models/meal.model";
 export class RestaurantComponent implements OnInit {
   restaurant: RestaurantModel ;
   meals: MealModel[] = []
+  isLoading: boolean;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -21,6 +22,8 @@ export class RestaurantComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
+
     this.route.params.subscribe(
       (params: Params) => {
         this.restaurantService.getRestaurant(+params["id"]).subscribe(
@@ -29,6 +32,8 @@ export class RestaurantComponent implements OnInit {
             this.restaurantService.getRestaurantMeals(this.restaurant.id).subscribe(
               (response: ResponseModel<MealModel>) => {
                 this.meals = response.list;
+                this.isLoading = false;
+
               }
             )
           }

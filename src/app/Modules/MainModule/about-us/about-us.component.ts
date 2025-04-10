@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ApplicationEnum} from "../../Constants/Application.enum";
 
 @Component({
   selector: 'app-about-us',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AboutUsComponent {
 
+  protected readonly ApplicationEnum = ApplicationEnum;
 }

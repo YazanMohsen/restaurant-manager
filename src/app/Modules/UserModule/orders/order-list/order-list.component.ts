@@ -17,7 +17,7 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.orderService.getOrders().subscribe((
+    this.orderService.getUserOrders().subscribe((
       (response: ResponseModel<OrderModel>) => {
         this.orders = response.list;
         this.isLoading = false;

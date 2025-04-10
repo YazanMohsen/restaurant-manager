@@ -15,6 +15,11 @@ import {MealsComponent} from "./meals-management/meals/meals.component";
 import {RestaurantsManagementComponent} from "./restaurant-management/restaurants-management.component";
 import {RestaurantFormComponent} from "./restaurant-management/restaurant-form/restaurant-form.component";
 import {MatPaginator} from "@angular/material/paginator";
+import {
+  RestaurantDialogComponent
+} from "./restaurant-management/restaurant-management/restaurant-dialog/restaurant-dialog.component";
+import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatButton} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -29,6 +34,7 @@ import {MatPaginator} from "@angular/material/paginator";
     MealsComponent,
     RestaurantsManagementComponent,
     RestaurantFormComponent,
+    RestaurantDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,10 @@ import {MatPaginator} from "@angular/material/paginator";
     MatProgressSpinner,
     FormsModule,
     MatPaginator,
+    MatDialogActions,
+    MatDialogContent,
+    MatDialogTitle,
+    MatButton,
   ],
   exports:[
   ]

@@ -6,6 +6,7 @@ import {RestaurantService} from "../../../Services/restaurant-service";
 import {OrderService} from "../../../Services/order.service";
 import {RestaurantModel} from "../../../Models/restaurant.model";
 import {PageEvent} from "@angular/material/paginator";
+import {AuthService} from "../../../Services/auth.service";
 
 @Component({
   selector: 'app-meals',
@@ -14,6 +15,7 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class MealsComponent implements OnInit {
   constructor(
+    private authService: AuthService,
     private restaurantService: RestaurantService,
   ) {
   }
@@ -24,18 +26,9 @@ export class MealsComponent implements OnInit {
   pageSize: number = 5;
   searchValue: string = "";
 
-  // ngOnInit() {
-  //
-  //   this.restaurantService.getMeals().subscribe(
-  //     (response: ResponseModel<MealModel>) => {
-  //       this.meals = response.list;
-  //       this.isLoading = false;
-  //     }
-  //   )
-  // }
   search(page?: number, pageSize?: number) {
     this.isLoading = true;
-    this.restaurantService.searchMeals(this.searchValue, page, pageSize).subscribe(
+    this.restaurantService.searchMeals(this.searchValue, page, pageSize,this.authService.getUser().restaurant_id).subscribe(
       (response: ResponseModel<MealModel>) => {
         this.isLoading = false;
         this.meals = response.list;

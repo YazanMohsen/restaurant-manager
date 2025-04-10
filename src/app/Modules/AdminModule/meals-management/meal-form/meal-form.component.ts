@@ -4,6 +4,8 @@ import {MealModel} from "../../../Models/meal.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ResponseModel} from "../../../Models/response.model";
 import {ImageService} from "../../../Services/image.service";
+import {ToastrService} from "ngx-toastr";
+import {AuthService} from "../../../Services/auth.service";
 
 @Component({
   selector: 'app-meal-form',
@@ -13,6 +15,8 @@ import {ImageService} from "../../../Services/image.service";
 export class MealFormComponent implements OnInit {
 
   constructor(
+    private authService: AuthService,
+    private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private managerService: ManagerService,
@@ -25,7 +29,7 @@ export class MealFormComponent implements OnInit {
   meal: MealModel = new MealModel(null, null, null, null, null);
 
   onSubmit() {
-    this.meal.restaurant_id = 1;
+    this.meal.restaurant_id = this.authService.getUser().restaurant_id;
     this.managerService.saveMeal(this.meal);
 
   }
@@ -34,8 +38,10 @@ export class MealFormComponent implements OnInit {
     this.imageService.upload($event.target.files[0]).subscribe(
       (response:ResponseModel<string>) => {
         this.meal.image = response.model;
-      }
-    )
+        this.toastr.success("","Image Uploaded Successfully");
+      },(error)=>{
+        this.toastr.error(error.message,"Failed to Upload Image");
+      })
   }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ManagerService} from "../../../Services/manager.service";
 import {ResponseModel} from "../../../Models/response.model";
 import {ImageService} from "../../../Services/image.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-restaurant-form',
@@ -13,6 +14,7 @@ export class RestaurantFormComponent {
   coverImage: string;
 
   constructor(
+    private toastr: ToastrService,
     private imageService: ImageService,
     private managerService: ManagerService) {
   }
@@ -29,15 +31,19 @@ export class RestaurantFormComponent {
     this.imageService.upload($event.target.files[0]).subscribe(
       (response: ResponseModel<string>) => {
         this.profileImage = response.model;
-      }
-    )
+        this.toastr.success("","Image Uploaded Successfully");
+      },(error)=>{
+        this.toastr.error(error.message,"Failed to Upload Image");
+      })
   }
 
   uploadCoverImage($event) {
     this.imageService.upload($event.target.files[0]).subscribe(
       (response: ResponseModel<string>) => {
         this.coverImage = response.model;
-      }
-    )
+        this.toastr.success("","Image Uploaded Successfully");
+      },(error)=>{
+        this.toastr.error(error.message,"Failed to Upload Image");
+      })
   }
 }

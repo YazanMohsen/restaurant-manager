@@ -9,7 +9,9 @@ export class RestaurantModel {
               public mobile_number,
               public time,
               public description?,
-              public status?
+              public status?,
+              public email?,
+              public password?
   ) {
   }
 }

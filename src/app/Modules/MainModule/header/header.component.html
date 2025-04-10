@@ -1,20 +1,20 @@
 <header class=" p-3 shadow bg-body rounded">
   <div class="row justify-content-around align-items-center">
     <div class="col-6">
-      <h5> Welcome to <span class="text-orange">Restaurant<strong>Manager</strong></span></h5>
+      <h5> Welcome to <span class="text-orange"><strong>{{ApplicationEnum.Name}}</strong></span></h5>
 
     </div>
-    <div class="col-5">
-      <ul class="nav nav-bar row justify-content-between align-items-center">
+    <div class="col-5" >
+      <ul  *ngIf="isGuest() || isClient()"   class="nav nav-bar row justify-content-between align-items-center">
         <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
             class=" pointer col-1 p-0  text-center"><a>Home</a></li>
-        <li routerLink="/restaurants/all" routerLinkActive="active" class=" pointer col-2  text-center p-0"><a>Restaurants</a>
+        <li  routerLink="/restaurants/all" routerLinkActive="active" class=" pointer col-2  text-center p-0"><a>Restaurants</a>
         </li>
-        <li routerLink="/restaurants/menu" routerLinkActive="active" class="col-1 pointer text-center p-0"><a>Meals</a>
+        <li  routerLink="/restaurants/menu" routerLinkActive="active" class="col-1 pointer text-center p-0"><a>Meals</a>
         </li>
         <li routerLink="/contact-us" routerLinkActive="active" class="col-2 pointer  text-center p-0"><a>Contact Us</a>
         </li>
-        <li routerLink="/about-us" routerLinkActive="active" class="col-2 pointer text-center p-0"><a>About Us</a></li>
+        <li  routerLink="/about-us" routerLinkActive="active" class="col-2 pointer text-center p-0"><a>About Us</a></li>
         <li class="col-1  text-center p-0 text-orange">|</li>
         <li *ngIf="!authenticated" routerLink="/auth/sign-in" routerLinkActive="active"
             class="col-2 pointer text-center p-0"><a>Sign In</a></li>
@@ -25,18 +25,19 @@
                   data-bs-auto-close="true"
                   aria-expanded="false">
             <i class="col-3 bi bi-person-circle text-secondary fa-2x"></i>
-            <h6 class="col-8 text-center app-fs-7 m-0">Yazan Mohsen</h6>
+            <h6 class="col-8 text-center app-fs-7 m-0">{{username}}</h6>
           </div>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" routerLink="/user/profile">Profile</a>
+          <div *ngIf="authenticated && isClient()" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<!--            <a class="dropdown-item" routerLink="/user/profile">Profile</a>-->
             <a class="dropdown-item" routerLink="/user/cart">Cart</a>
             <a class="dropdown-item" routerLink="/user/orders/list">Orders </a>
-            <a class="dropdown-item" (click)="onSignOut()">Sign Out </a>
+            <a class="dropdown-item pointer" (click)="onSignOut()">Sign Out </a>
           </div>
 
         </li>
       </ul>
     </div>
+    <a *ngIf="authenticated && !isClient()" class="col-1 dropdown-item pointer" (click)="onSignOut()">Sign Out </a>
 
   </div>
 

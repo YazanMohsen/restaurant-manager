@@ -13,22 +13,24 @@ import {MealsComponent} from "./meals-management/meals/meals.component";
 import {MealFormComponent} from "./meals-management/meal-form/meal-form.component";
 import {RestaurantFormComponent} from "./restaurant-management/restaurant-form/restaurant-form.component";
 import {RestaurantsManagementComponent} from "./restaurant-management/restaurants-management.component";
+import {RestaurantAdminGuard} from "../AuthModule/restaurant-admin.guard";
+import {SystemAdminGuard} from "../AuthModule/system-admin.guard";
 
 let appRoutes: Route[] = [
 
   {
-    path: 'restaurant-manager', component: AdminHomeComponent,
+    path: 'restaurant-manager', component: AdminHomeComponent, canActivate: [RestaurantAdminGuard],
     children: [
+      // {
+      //   path: 'restaurants', component: RestaurantsManagementComponent,
+      //   children: [
+      //     {path: 'all', component: RestaurantManagementComponent, canActivate: [SystemAdminGuard],},
+      //     {path: 'add', component: RestaurantFormComponent,},
+      //
+      //   ]
+      // },
       {
-        path: 'restaurants', component: RestaurantsManagementComponent,
-        children: [
-          {path: 'all', component: RestaurantManagementComponent,},
-          {path: 'add', component: RestaurantFormComponent,},
-
-        ]
-      },
-      {
-        path: 'meals', component: MealsManagementComponent,
+        path: 'meals', component: MealsManagementComponent, canActivate: [RestaurantAdminGuard],
         children: [
           {path: 'all', component: MealsComponent,},
           {path: 'add', component: MealFormComponent,},
@@ -36,16 +38,31 @@ let appRoutes: Route[] = [
         ]
       },
       {
-        path: 'orders', component: OrdersManagementComponent,
+        path: 'orders', component: OrdersManagementComponent, canActivate: [RestaurantAdminGuard],
         children: [
           {path: 'all', component: OrderManagementListComponent,},
           {path: ':id', component: OrderManagementComponent,},
 
         ]
       },
-      {path: 'reservations', component: ReservationManagementComponent,},
+      {path: 'reservations', component: ReservationManagementComponent, canActivate: [RestaurantAdminGuard],},
     ]
+
   },
+  {
+    path: 'system', component: AdminHomeComponent, canActivate: [SystemAdminGuard],
+    children: [
+      {
+        path: 'restaurants', component: RestaurantsManagementComponent,
+        children: [
+          {path: 'all', component: RestaurantManagementComponent, canActivate: [SystemAdminGuard],},
+        ]
+      },
+    ]
+
+  }
+  ,
+  {path: 'register', component: RestaurantFormComponent,},
 
 ];
 

@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
+import {AuthService} from "../../Services/auth.service";
+import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-sign-in',
@@ -19,8 +22,28 @@ import {animate, style, transition, trigger} from "@angular/animations";
   ]
 })
 export class SignInComponent {
-  OnSubmit(value: any){
+  constructor(
+    private toastr: ToastrService,
+    private router: Router,
+    private authService: AuthService) {
+  }
 
+  OnSubmit(value: any) {
+    this.authService.login(value).subscribe(
+      () => {
+        this.toastr.success("You Logged in Successfully ","Welcome  "+this.authService.getUser().name);
+        if (this.authService.isClient())
+          this.router.navigate(['/restaurants/all']);
+        else if (this.authService.isRestaurantAdmin())
+          this.router.navigate(['/admin/restaurant-manager']);
+        else if (this.authService.isSystemAdmin())
+          this.router.navigate(['/admin/system']);
+      },
+      (error)=>{
+        this.toastr.error(error.message,'Failed To Login ');
+
+      }
+    );
   };
 
 }

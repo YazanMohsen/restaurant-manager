@@ -13,7 +13,7 @@
       <table class="shadow table w-100 table-striped  m-0 p-0">
         <thead class="text-white text-center  bg-orange">
         <th scope="col" style="width:10% ">Name</th>
-        <th scope="col" style="width:10% ">Mobile Number</th>
+        <th scope="col" style="width:10% ">Phone</th>
         <th scope="col" style="width:15% ">Description</th>
         <th scope="col">Profile Image</th>
         <th scope="col">Cover Image</th>
@@ -35,7 +35,7 @@
           <th class="align-middle" scope="row">
             <div *ngIf="restaurant.status=='Approved';" class="text-green">{{restaurant.status}}</div>
             <div *ngIf="restaurant.status!='Approved'" class="row p-0 m-0 ">
-              <button class="btn btn-success  mb-2" (click)="approve(restaurant)">Approve</button>
+              <button class="btn btn-success  mb-2" (click)="openDialog(restaurant)">Approve</button>
               <button class="btn btn-danger mb-2" (click)="reject(restaurant)">Reject</button>
             </div>
           </th>

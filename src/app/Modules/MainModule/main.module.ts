@@ -8,6 +8,7 @@ import {MainRouterModule} from "./main-router.module";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { FAQsComponent } from './faqs/faqs.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { FAQsComponent } from './faqs/faqs.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MainRouterModule
+    MainRouterModule,
+    ToastrModule.forRoot(
+      {  positionClass: 'toast-bottom-left',}
+    )
+
   ],
   exports:[
     HeaderComponent,

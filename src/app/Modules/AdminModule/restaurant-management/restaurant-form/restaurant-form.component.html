@@ -39,7 +39,7 @@
     </div>
     <div class="col-5">
       <div class="mb-5 mt-4 position-relative p-0   ">
-        <img class=" shadow" [src]="profileImage" width="470" height="300">
+        <img class=" shadow" [src]="profileImage" width="575" height="300">
         <label for="profileImage" class="position-relative  position-absolute bottom-0 start-0  m-0  gradient-input  ">
           <input type="file" class="d-none" name="profile_image" ngModel id="profileImage" required
                  (change)="uploadProfileImage($event)">
@@ -48,7 +48,7 @@
         </label>
       </div>
       <div class="mb-5 mt-4 position-relative p-0   ">
-        <img class="shadow" [src]="coverImage" width="470" height="300">
+        <img class="shadow" [src]="coverImage" width="575" height="300">
         <label for="coverImage" class="position-relative  position-absolute bottom-0 start-0  m-0  gradient-input  ">
           <input type="file" class="d-none" name="cover_image" ngModel id="coverImage" required
                  (change)="uploadCoverImage($event)">

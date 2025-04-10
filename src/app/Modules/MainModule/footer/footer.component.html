@@ -1,4 +1,4 @@
-<footer class="text-center text-white ff-Segoe">
+<footer *ngIf="isGuest() || isClient()" class="text-center text-white ff-Segoe">
   <div class=" bg-dining">
     <div class="row justify-content-center p-3 w-100">
       <div class="col-3">
@@ -13,7 +13,7 @@
   </div>
   <div class="bg-dark p-3">
     <div class="row justify-content-center m-3">
-      <h5 class="col-3 text-orange">Restaurant<span class="fw-bolder">Manager</span></h5>
+      <h5 class="col-3 text-orange"><strong>{{ApplicationEnum.Name}}</strong></h5>
     </div>
     <div class="row justify-content-center m-3">
       <ul class="col-4 nav nav-bar row justify-content-between">
@@ -32,7 +32,7 @@
       </ul>
     </div>
     <div class="row justify-content-center">
-      <p class="col-3 ">RestaurantManager.com | All rights reserved</p>
+      <p class="col-3 ">{{ApplicationEnum.Name}}.com | All rights reserved</p>
     </div>
   </div>
 

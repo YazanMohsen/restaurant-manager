@@ -1,4 +1,8 @@
-<div class="row w-100 justify-content-center" *ngIf="restaurant">
+<div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
+  <mat-spinner  ></mat-spinner>
+</div>
+
+<div class="row w-100 justify-content-center" *ngIf="restaurant && !isLoading">
   <div class="col-7 p-4 m-4 shadow">
     <h3 class="text-secondary pointer"
         routerLink="/restaurants/all"
@@ -51,8 +55,8 @@
   <div class="col-3 p-4 m-4 shadow ">
     <h3 class=" col-8 text-secondary mt-2">Special Dishes </h3>
     <hr class="base-class hr-orange">
-    <div class="row align-items-center" *ngFor="let specialDish of meals.slice(0,4)">
-      <img class=" col-6 rounded-circle shadow p-2 " width="600" height="200"
+    <div class="row align-items-center p-2" *ngFor="let specialDish of meals.slice(0,4)">
+      <img class=" col-6  rounded-circle bg-dark  shadow p-1 " width="300" height="150"
            [src]="specialDish.image">
 
     <div class="col-6">

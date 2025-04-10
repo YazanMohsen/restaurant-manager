@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {AuthService} from "../../Services/auth.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +23,10 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 export class SignUpComponent {
 
-  OnSubmit(value: any) {
-
+  constructor(private authService:AuthService ) {
   }
+  OnSubmit(value: any){
+    this.authService.signup(value).subscribe();
+  };
+
 }

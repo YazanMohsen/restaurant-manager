@@ -1,0 +1,16 @@
+<form class=" p-5 bg-light">
+<div class="col-12  d-flex flex-column  justify-content-between">
+  <h6 class="text-center  ">Enter Restaurant Credentials </h6>
+  <div class="mb-3 mt-3 input-group">
+    <span class="input-group-text border-0 bg-transparent"><i class="bi bi-person"></i></span>
+    <input type="text" class="form-control border-top-0 border-right-0 border-left-0 " name="email"  placeholder="Email" [(ngModel)]="credentials.email" email required>
+  </div>
+  <div class="mb-3 input-group">
+    <span class="input-group-text border-0 bg-transparent"><i class="bi bi-key"></i></span>
+    <input type="password" class="form-control border-top-0 border-right-0 border-left-0 " name="password" ngModel placeholder="Password"[(ngModel)]="credentials.password"  required>
+  </div>
+  <div class="mb-3 text-center ">
+    <button class="btn btn-success pr-4 pl-4 " (click)="onClose()" >Approve</button>
+  </div>
+</div>
+</form>

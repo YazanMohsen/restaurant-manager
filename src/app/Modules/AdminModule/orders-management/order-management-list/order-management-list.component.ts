@@ -3,6 +3,8 @@ import {OrderService} from "../../../Services/order.service";
 import {OrderModel} from "../../../Models/order.model";
 import {ResponseModel} from "../../../Models/response.model";
 import {PageEvent} from "@angular/material/paginator";
+import {ToastrService} from "ngx-toastr";
+import {AuthService} from "../../../Services/auth.service";
 
 @Component({
   selector: 'app-order-management-list',
@@ -10,7 +12,10 @@ import {PageEvent} from "@angular/material/paginator";
   styleUrl: './order-management-list.component.css'
 })
 export class OrderManagementListComponent implements OnInit {
-  constructor(private orderService: OrderService,) {
+  constructor(
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private orderService: OrderService,) {
   }
 
   orders: OrderModel[] = []
@@ -21,7 +26,7 @@ export class OrderManagementListComponent implements OnInit {
 
   search(page?: number, pageSize?: number) {
     this.isLoading = true;
-    this.orderService.searchOrders(this.searchValue, page, pageSize).subscribe(
+    this.orderService.searchOrders(this.searchValue, page, pageSize,this.authService.getUser().restaurant_id).subscribe(
       (response: ResponseModel<OrderModel>) => {
         this.isLoading = false;
         this.orders = response.list;
@@ -42,6 +47,9 @@ export class OrderManagementListComponent implements OnInit {
   updateStatus(order: OrderModel) {
     this.orderService.updateOrder(order.id,order).subscribe(() => {
       this.search(0, this.pageSize);
+      this.toastr.success("","Order Updated Successfully")
+    },(error)=>{
+      this.toastr.error(error.message,"Failed to Update Orded")
     })
   }
 }

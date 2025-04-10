@@ -1,5 +1,6 @@
 import {MealModel} from "./meal.model";
 import {OrderStatus} from "../Constants/order-status.enum";
+import {AuthService} from "../Services/auth.service";
 
 export class OrderModel {
   constructor(public user_id: number,
@@ -15,7 +16,7 @@ export class OrderModel {
 
   static initCart() {
     return new OrderModel(
-      1,
+      AuthService.getCurrentUser().id,
       OrderStatus.InCart,
       0,
       0,

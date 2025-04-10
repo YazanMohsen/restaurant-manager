@@ -3,8 +3,12 @@ import {RestaurantService} from "../../Services/restaurant-service";
 import {MealModel} from "../../Models/meal.model";
 import {OrderService} from "../../Services/order.service";
 import {ResponseModel} from "../../Models/response.model";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {PageEvent} from "@angular/material/paginator";
+import {AuthService} from "../../Services/auth.service";
+import {RestaurantModel} from "../../Models/restaurant.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +19,9 @@ export class MenuComponent implements OnInit ,OnDestroy{
 
 
   constructor(
+    private toastr: ToastrService,
+    private authService:AuthService,
+    private router:Router,
     private activatedRoute: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService
@@ -22,10 +29,15 @@ export class MenuComponent implements OnInit ,OnDestroy{
   }
 
   restaurantName: string;
+  restaurantId: number;
   meals: MealModel[] = []
   isLoading: boolean;
   actionLoader: Boolean;
   actionLoaderListener: Subscription;
+  totalCount: number;
+  pageSize: number = 5;
+
+  searchValue: string = "";
 
   ngOnInit(): void {
     this.actionLoaderListener= this.orderService.getLoaderPublisher().subscribe(
@@ -39,20 +51,10 @@ export class MenuComponent implements OnInit ,OnDestroy{
         const restaurantId = params['restaurantId'];
         const restaurantName = params['restaurantName'];
         if (!restaurantId) {
-
-          this.restaurantService.getMeals().subscribe(
-            (response: ResponseModel<MealModel>) => {
-              this.meals = response.list;
-              this.isLoading = false;
-            }
-          )
+          this.search(0, this.pageSize);
         } else {
-          this.restaurantService.getRestaurantMeals(restaurantId).subscribe(
-            (response: ResponseModel<MealModel>) => {
-              this.meals = response.list;
-              this.isLoading = false;
-            }
-          )
+          this.restaurantId=restaurantId
+          this.search(0, this.pageSize);
           this.restaurantName = restaurantName;
         }
       }
@@ -60,11 +62,27 @@ export class MenuComponent implements OnInit ,OnDestroy{
   }
 
   addToCart(foodModel) {
+    if(this.authService.getUser()==null)
+      this.router.navigate(['auth/sign-in'])
     this.orderService.getLoaderPublisher().next(true);
     this.orderService.addToCart({...foodModel, count: 1, item_id: foodModel.id, id: null})
   }
 
   ngOnDestroy(): void {
     this.actionLoaderListener.unsubscribe();
+  }
+  paginate(event: PageEvent) {
+    this.search(event.pageIndex, event.pageSize);
+
+  }
+  search(page?: number, pageSize?: number) {
+    this.isLoading = true;
+    this.restaurantService.searchMeals(this.searchValue, page, pageSize,this.restaurantId).subscribe(
+      (response: ResponseModel<MealModel>) => {
+        this.isLoading = false;
+        this.meals = response.list;
+        this.totalCount = 20;
+      }
+    )
   }
 }
