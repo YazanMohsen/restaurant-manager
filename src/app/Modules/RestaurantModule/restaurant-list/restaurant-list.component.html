@@ -17,7 +17,11 @@
            [routerLink]="'/restaurants/'+restaurant.id">
         <img width="300" height="300" class="card-img-top" [src]="restaurant.profile_image" alt="">
         <div class="card-body">
-          <h5 class="text-secondary">{{restaurant.name}}</h5>
+          <div class="row">
+          <h5 class="col-8 text-secondary">{{restaurant.name}}</h5>
+          <h5 class="col-4  text-end text-orange ">
+            {{restaurant.avg_rate}}<i class="ml-2 bi bi-star"></i></h5>
+          </div>
           <p>{{restaurant.location.substring(0,50)}} </p>
           <p>{{restaurant.time}}</p>
         </div>

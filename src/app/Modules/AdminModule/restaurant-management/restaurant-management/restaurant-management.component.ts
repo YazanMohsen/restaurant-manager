@@ -31,7 +31,7 @@ export class RestaurantManagementComponent implements OnInit {
       (response: ResponseModel<RestaurantModel>) => {
         this.isLoading = false;
         this.restaurants = response.list;
-        this.totalCount = 20;
+        this.totalCount = response.total_count;
       }
     )
   }

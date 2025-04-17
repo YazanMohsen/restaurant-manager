@@ -1,16 +1,31 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {RestaurantListComponent} from "./restaurant-list/restaurant-list.component";
 import {RestaurantComponent} from "./restaurant/restaurant.component";
 import {RestaurantRouterModule} from "./restaurant-router.module";
-import { RestaurantMainComponent } from './restaurant-main/restaurant-main.component';
-import { MenuComponent } from './menu/menu.component';
+import {RestaurantMainComponent} from './restaurant-main/restaurant-main.component';
+import {MenuComponent} from './menu/menu.component';
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTable} from "@angular/material/table";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {RatingComponent} from "./rating/rating.component";
+import {MatFormField, MatFormFieldModule, MatSuffix} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule, MatOption} from "@angular/material/core";
+import {MatInput} from "@angular/material/input";
+import {TimePickerComponent} from "../Utils/time-picker/time-picker.component";
+import {MatSelect} from "@angular/material/select";
+import {DatePipe} from "@angular/common";
+import {ReservationDialogComponent} from "./restaurant/reservation-dialog/reservation-dialog.component";
+import {
+  ReservationResponseDialogComponent
+} from "./restaurant/reservation-response-dialog/reservation-response-dialog.component";
+import {TimeFormatPipe} from "../Utils/time-format.pipe";
+import {AppModule} from "../../app.module";
+import {UtilsModule} from "../Utils/utils.module";
 
 @NgModule({
   declarations: [
@@ -18,6 +33,9 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     RestaurantComponent,
     RestaurantMainComponent,
     MenuComponent,
+    RatingComponent,
+    ReservationDialogComponent,
+    ReservationResponseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +45,18 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     MatPaginator,
     MatSort,
     MatTable,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormField,
+    MatInput,
+    MatSuffix,
+    MatSelect,
+    MatOption,
+    MatFormFieldModule,
+    UtilsModule
   ],
+  providers: [DatePipe]
 })
-export class RestaurantModule { }
+export class RestaurantModule {
+}

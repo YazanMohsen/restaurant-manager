@@ -19,8 +19,15 @@ import {
   RestaurantDialogComponent
 } from "./restaurant-management/restaurant-management/restaurant-dialog/restaurant-dialog.component";
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
-import {MatButton} from "@angular/material/button";
-
+import {MatButton, MatFabButton} from "@angular/material/button";
+import {TablesManagementComponent} from "./tables-management/tables-management.component";
+import {TablesFormDialog} from "./tables-management/tables-form-dialog/tables-form-dialog";
+import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import {AgGridModule} from "ag-grid-angular";
+import {MatToolbar} from "@angular/material/toolbar";
+import {MatCard} from "@angular/material/card";
+import {AllEnterpriseModule, ModuleRegistry} from "ag-grid-enterprise";
+ModuleRegistry.registerModules([AllEnterpriseModule]);
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -34,7 +41,9 @@ import {MatButton} from "@angular/material/button";
     MealsComponent,
     RestaurantsManagementComponent,
     RestaurantFormComponent,
-    RestaurantDialogComponent
+    RestaurantDialogComponent,
+    TablesManagementComponent,
+    TablesFormDialog
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,12 @@ import {MatButton} from "@angular/material/button";
     MatDialogContent,
     MatDialogTitle,
     MatButton,
+    MatFabButton,
+    MatGridList,
+    MatGridTile,
+    MatToolbar,
+    MatCard,
+    AgGridModule
   ],
   exports:[
   ]

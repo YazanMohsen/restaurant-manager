@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../Services/auth.service";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
@@ -23,10 +25,23 @@ import {AuthService} from "../../Services/auth.service";
 })
 export class SignUpComponent {
 
-  constructor(private authService:AuthService ) {
+  constructor(
+    private toastr: ToastrService,
+    private router: Router,
+    private authService:AuthService ) {
   }
   OnSubmit(value: any){
-    this.authService.signup(value).subscribe();
+    this.authService.signup(value).subscribe(
+      ()=>{
+        this.toastr.success("You Registered Successfully ","Welcome  "+this.authService.getUser().name);
+        if (this.authService.isClient())
+          this.router.navigate(['/restaurants/all']);
+      },
+      (error)=>{
+        this.toastr.error(error.message,'Failed To Register');
+
+      }
+    );
   };
 
 }

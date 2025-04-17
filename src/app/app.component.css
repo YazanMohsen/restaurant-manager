@@ -18,10 +18,10 @@
   color:  var(--app-green);
 }
 .bg-orange {
-  background-color: var(--app-orange);
+  background-color: var(--app-orange)!important;
 }
 .bg-red {
-  background-color: var(--app-red);
+  background-color: var(--app-red) !important;
 }
 body,html {
   margin: 0;
@@ -35,7 +35,7 @@ body,html {
 .hr-orange{
   background-color: var(--app-orange);
   opacity:1;
-  height: 1px;
+  height: 0.5px;
 }
 .active{
   border-bottom: 1px solid var(--app-orange);

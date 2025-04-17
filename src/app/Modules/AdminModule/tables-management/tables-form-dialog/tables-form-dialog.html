@@ -1,0 +1,26 @@
+
+<form
+      #TableForm="ngForm"
+      class=" shadow  p-4  d-flex flex-column h-100 bg-light">
+  <div class="row">
+  <h4 class="col-12 text-center "> Table Details</h4>
+  </div>
+  <div class=" justify-content-around mb-5 mt-5 ">
+<!--    <div class="col-5">-->
+      <div class="input-group mb-3 ">
+        <span class="input-group-text border-0 bg-transparent p-0">Number</span>
+        <input type="text" class="form-control border-top-0 border-right-0 border-left-0  ml-2"
+               [(ngModel)]="table.number" required name="number">
+      </div>
+      <div class=" input-group ">
+        <span class="input-group-text border-0 bg-transparent p-0">Capacity</span>
+        <input type="number" class="form-control border-top-0 border-right-0 border-left-0 ml-2"
+               [(ngModel)]="table.capacity" required name="capacity">
+      </div>
+
+  </div>
+  <button mat-raised-button class="btn btn-dark w-50 text-center align-self-center" (click)="startLoading()" [disabled]="isLoading">
+    <mat-spinner  *ngIf="isLoading" diameter="24"></mat-spinner>
+  <span *ngIf="!isLoading"> Save Table</span>
+  </button>
+</form>

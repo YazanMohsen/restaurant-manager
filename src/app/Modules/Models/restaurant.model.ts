@@ -8,10 +8,12 @@ export class RestaurantModel {
               public location,
               public mobile_number,
               public time,
+              public avg_rate,
               public description?,
               public status?,
               public email?,
-              public password?
+              public password?,
+              public user_rating?
   ) {
   }
 }

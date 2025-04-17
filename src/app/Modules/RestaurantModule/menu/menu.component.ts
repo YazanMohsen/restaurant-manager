@@ -15,13 +15,13 @@ import {ToastrService} from "ngx-toastr";
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit ,OnDestroy{
+export class MenuComponent implements OnInit, OnDestroy {
 
 
   constructor(
     private toastr: ToastrService,
-    private authService:AuthService,
-    private router:Router,
+    private authService: AuthService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService
@@ -35,12 +35,12 @@ export class MenuComponent implements OnInit ,OnDestroy{
   actionLoader: Boolean;
   actionLoaderListener: Subscription;
   totalCount: number;
-  pageSize: number = 5;
+  pageSize: number = 6;
 
   searchValue: string = "";
 
   ngOnInit(): void {
-    this.actionLoaderListener= this.orderService.getLoaderPublisher().subscribe(
+    this.actionLoaderListener = this.orderService.getLoaderPublisher().subscribe(
       (loading) => {
         this.actionLoader = loading;
       }
@@ -53,7 +53,7 @@ export class MenuComponent implements OnInit ,OnDestroy{
         if (!restaurantId) {
           this.search(0, this.pageSize);
         } else {
-          this.restaurantId=restaurantId
+          this.restaurantId = restaurantId
           this.search(0, this.pageSize);
           this.restaurantName = restaurantName;
         }
@@ -62,8 +62,10 @@ export class MenuComponent implements OnInit ,OnDestroy{
   }
 
   addToCart(foodModel) {
-    if(this.authService.getUser()==null)
+    if (this.authService.getUser() == null) {
       this.router.navigate(['auth/sign-in'])
+      return;
+    }
     this.orderService.getLoaderPublisher().next(true);
     this.orderService.addToCart({...foodModel, count: 1, item_id: foodModel.id, id: null})
   }
@@ -71,18 +73,36 @@ export class MenuComponent implements OnInit ,OnDestroy{
   ngOnDestroy(): void {
     this.actionLoaderListener.unsubscribe();
   }
+
   paginate(event: PageEvent) {
     this.search(event.pageIndex, event.pageSize);
-
   }
+
   search(page?: number, pageSize?: number) {
     this.isLoading = true;
-    this.restaurantService.searchMeals(this.searchValue, page, pageSize,this.restaurantId).subscribe(
+    this.restaurantService.searchMeals(this.searchValue, page, pageSize, this.restaurantId).subscribe(
       (response: ResponseModel<MealModel>) => {
         this.isLoading = false;
         this.meals = response.list;
-        this.totalCount = 20;
+        this.totalCount = response.total_count;
       }
+    )
+  }
+
+  addRate(id, rate) {
+    if (this.authService.getUser() == null) {
+      this.router.navigate(['auth/sign-in'])
+      return;
+    }
+    this.restaurantService.addMealRate(id, rate).subscribe(
+      ()=>{
+        this.toastr.success("Rated Successfully ","");
+        this.search(0, this.pageSize);
+      },
+      (error)=>{
+        this.toastr.error(error.message,'Failed To Rate');
+
+      },
     )
   }
 }

@@ -1,42 +1,36 @@
-<div class="">
+<div class="h-100 bg-light d-flex flex-column justify-content-between ">
   <div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
     <mat-spinner></mat-spinner>
   </div>
+  <div class="h-100 d-flex flex-column bg-light justify-content-between ">
+    <div *ngIf="meals.length==0">
+      <div class=" d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center text-orange ">
+          <h3>No Meals Available</h3>
+        </div>
+      </div>
+    </div>
+    <div class="h-100 d-flex flex-column bg-light justify-content-between ">
+      <ag-grid-angular
+        [theme]="themeMaterial.withParams({ backgroundColor:'#f8f9fa',headerBackgroundColor: '#f8f9fa',})"
+        *ngIf="meals.length>0"
+        class=" h-75"
+        [rowData]="meals"
+        [columnDefs]="columnDefs"
+        [rowHeight]="75"
+        (rowClicked)="update($event)"
+        [defaultColDef]="{ flex: 1 }"
+        [animateRows]="true">
 
-  <div  *ngIf="!isLoading" >
-    <table class="shadow table table-striped  ">
-      <thead class="text-white text-center   bg-orange">
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col" class="w-25">Description</th>
-      <th scope="col">Image</th>
-      <th scope="col">Price</th>
-      <th scope="col"></th>
-      </thead>
-      <tbody class="text-center">
-      <tr *ngFor="let meal of meals">
-        <th class="align-middle" scope="row">{{meal.id}}</th>
-        <th class="align-middle" scope="row">
-          {{meal.name}}
-          </th>
-        <td class="align-middle w-30">{{meal.description}}</td>
-        <td><img width="200" height="150"
-                 class=" p-2" src="{{meal.image}}"></td>
-        <td class="align-middle">{{meal.price}} S.P</td>
-        <td class="align-middle"><button
-          routerLink="../add"
-          [queryParams]="{id:meal.id}"
-          class="btn btn-secondary">Update</button></td>
+      </ag-grid-angular>
 
-      </tr>
-      </tbody>
-    </table>
+      <mat-paginator class="bg-dark" [length]="totalCount"
+                     [pageSizeOptions]="[1, 5, 10]"
+                     (page)="paginate($event)"
+                     [pageSize]="pageSize"
+      ></mat-paginator>
+    </div>
   </div>
 </div>
 
-<mat-paginator class="bg-dark"[length]="totalCount"
-               [pageSizeOptions]="[1, 5, 10]"
-               (page)="paginate($event)"
-               [pageSize]="pageSize"
-></mat-paginator>
 

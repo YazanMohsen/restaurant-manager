@@ -1,0 +1,8 @@
+<div class="row">
+  <mat-form-field  subscriptSizing="dynamic" appearance="fill">
+    <mat-label>Select Time</mat-label>
+    <mat-select [(value)]="selectedTime" (selectionChange)="onTimeSelected($event)">
+      <mat-option *ngFor="let time of times" [value]="time.value">{{ time.time }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

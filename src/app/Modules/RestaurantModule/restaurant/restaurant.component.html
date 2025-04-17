@@ -1,15 +1,29 @@
 <div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
-  <mat-spinner  ></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 
 <div class="row w-100 justify-content-center" *ngIf="restaurant && !isLoading">
   <div class="col-7 p-4 m-4 shadow">
-    <h3 class="text-secondary pointer"
-        routerLink="/restaurants/all"
-    ><i class="bi bi-chevron-left fa-xs"></i>Go Back</h3>
+    <div class="row align-items-center ">
+      <h3 class="col-7 text-secondary pointer m-0" routerLink="/restaurants/all"><i
+        class="bi bi-chevron-left fa-xs"></i>Go
+        Back</h3>
+      <div class="col-5">
+        <app-rating class="d-flex justify-content-end"
+                    [type]="'restaurant'"
+                    [rating]="restaurant.user_rating"
+                    (restaurantRating)="addRate($event)"
+        ></app-rating>
+      </div>
+
+
+    </div>
     <hr class="hr-orange">
     <img [src]="restaurant.cover_image " alt="" width="100%" height="400">
-    <h3 class="text-secondary mt-2">{{restaurant.name}} ({{restaurant.mobile_number}})</h3>
+    <div class="row mt-3 align-items-center">
+      <h3 class="col-7 mt-0 text-secondary mt-2">{{restaurant.name}} ({{restaurant.mobile_number}})</h3>
+      <h5 class="col-5 text-end text-orange ">{{restaurant.avg_rate}}<i class="ml-2 bi bi-star"></i></h5>
+    </div>
     <hr class="hr-orange">
     <div class="row mb-3">
       <div class="col-6">
@@ -25,47 +39,52 @@
         </div>
       </div>
       <div class="col-6 row">
-        <i class="col-1 bi bi-list text-orange">  </i>
+        <i class="col-1 bi bi-list text-orange"> </i>
         <p class="col-11 "> {{restaurant.description}}</p>
       </div>
     </div>
     <div class="row justify-content-around ">
 
-      <button class="col-2 btn btn-secondary bg-white text-secondary">
-        <i class="bi bi-calendar text-orange"></i>
-        Date
-        <i class="bi bi-chevron-down"></i>
-      </button>
-      <button class="col-2 btn btn-secondary bg-white text-secondary">
-        <i class="bi bi-clock text-orange"></i>
-        Time
-        <i class="bi bi-chevron-down"></i>
-      </button>
-      <button class="col-2 btn btn-secondary bg-white text-secondary">
-        <i class="bi bi-people text-orange"></i>
-        People
-        <i class="bi bi-chevron-down"></i>
-      </button>
-      <label class="col-1"><input type="radio" name="slot"> In</label>
-      <label class="col-2"><input type="radio" name="slot"> Out</label>
+      <mat-form-field subscriptSizing="dynamic" class="col-3 p-0 ">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-      <button class="col-2 btn btn-dark border-0 bg-orange text-white ">Find Slot</button>
+      <app-time-picker class="col-3 p-0 "
+                       (selectedTimeEmitter)="setTime($event);"
+      ></app-time-picker>
+
+      <mat-form-field class="col-3 p-0 " subscriptSizing="dynamic" appearance="fill">
+        <mat-label>Guests</mat-label>
+        <mat-select [(value)]="peopleCount">
+          <mat-option *ngFor="let person of people" [value]="person">{{ person }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="col-2 btn btn-dark border-0 bg-orange text-white"
+              [disabled]="peopleCount==null || time==null || date==null "
+              (click)="findReservation()">Find Slot
+      </button>
     </div>
   </div>
-  <div class="col-3 p-4 m-4 shadow ">
-    <h3 class=" col-8 text-secondary mt-2">Special Dishes </h3>
+  <div class="col-3 p-4 m-4 shadow bg-white">
+    <h3 class="text-secondary mt-2  ">Special Menu
+    </h3>
     <hr class="base-class hr-orange">
-    <div class="row align-items-center p-2" *ngFor="let specialDish of meals.slice(0,4)">
-      <img class=" col-6  rounded-circle bg-dark  shadow p-1 " width="300" height="150"
-           [src]="specialDish.image">
+    <div *ngIf="meals">
+      <div class="row align-items-center  mb-1" *ngFor="let specialDish of meals.slice(0,4)">
+        <img class=" col-6 p-3 " width="400" height="160"
+             [src]="specialDish.image">
 
-    <div class="col-6">
-      <h5>{{specialDish.name}}</h5>
-      <p class=" ">
-        {{specialDish.description.substring(0,50)}}</p>
+        <div class="col-6 ">
+          <h5 class="text-orange">{{specialDish.name}}</h5>
+          <p class=" ">
+            {{specialDish.description.substring(0, 50)}}</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
 
 </div>

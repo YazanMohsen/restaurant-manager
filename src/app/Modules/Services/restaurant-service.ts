@@ -44,4 +44,26 @@ export class RestaurantService {
   update(restaurant: RestaurantModel) {
     return this.httpService.put("restaurants/" + restaurant.id, restaurant);
   }
+  addRestaurantRate(restaurantId,ratingValue) {
+    let rating={
+      // user_id:1,
+      // rateable_type:"restaurant",
+      rateable_id:restaurantId,
+      rating:ratingValue
+    }
+    return this.httpService.post("ratings/restaurant",rating);
+  }
+  addMealRate(mealId,ratingValue) {
+    let rating={
+      // user_id:1,
+      // rateable_type:"App\\Models\\Item",
+      rateable_id:mealId,
+      rating:ratingValue
+    }
+    return this.httpService.post("ratings/item",rating);
+  }
+  updateRate(restaurant: RestaurantModel) {
+    return this.httpService.put("ratings/" + restaurant.id, restaurant);
+  }
+
 }

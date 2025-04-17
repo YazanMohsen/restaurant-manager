@@ -28,9 +28,10 @@
             <h6 class="col-8 text-center app-fs-7 m-0">{{username}}</h6>
           </div>
           <div *ngIf="authenticated && isClient()" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<!--            <a class="dropdown-item" routerLink="/user/profile">Profile</a>-->
+<!--            <a class="dropdown-item" routerLink="/user/reservations">Profile</a>-->
             <a class="dropdown-item" routerLink="/user/cart">Cart</a>
             <a class="dropdown-item" routerLink="/user/orders/list">Orders </a>
+            <a class="dropdown-item" routerLink="/user/reservations">Reservations</a>
             <a class="dropdown-item pointer" (click)="onSignOut()">Sign Out </a>
           </div>
 

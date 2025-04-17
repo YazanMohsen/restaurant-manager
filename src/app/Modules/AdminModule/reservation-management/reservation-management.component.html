@@ -1,1 +1,33 @@
-<p>reservation-management works!</p>
+<div class="h-100 bg-light ">
+  <div *ngIf="isLoading" class="min-vh-100 d-flex justify-content-center align-items-center ">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="h-100" >
+    <div *ngIf="reservations.length==0;">
+      <div class=" d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center text-orange ">
+          <h3>No Reservations Available</h3>
+        </div>
+      </div>
+    </div>
+    <div class="h-100 d-flex flex-column bg-light justify-content-between ">
+      <ag-grid-angular
+        *ngIf="reservations.length>0"
+        class=" h-75"
+        [theme]="themeMaterial.withParams({ backgroundColor:'#f8f9fa',headerBackgroundColor: '#f8f9fa',})"
+        [rowData]="reservations"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="{ flex: 1 }"
+        [animateRows]="true">
+
+      </ag-grid-angular>
+
+      <mat-paginator class="bg-dark" [length]="totalCount"
+                     [pageSizeOptions]="[1, 5, 10]"
+                     (page)="paginate($event)"
+                     [pageSize]="pageSize"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>
+

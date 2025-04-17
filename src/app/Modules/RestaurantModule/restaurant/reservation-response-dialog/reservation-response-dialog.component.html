@@ -1,0 +1,36 @@
+<div class="h-100 bg-light p-3">
+  <div>
+
+    <div class="row justify-content-center">
+      <i
+        class="col-4 bi {{data.status ? 'bi-check-circle text-orange fs-1 text-center ' : 'bi bi-x-circle-fill fs-1 text-center text-red'}}"></i>
+    </div>
+
+    <div class="mt-2 row justify-content-between">
+      <h3
+        class="col-12 text-dark text-center">{{data.status ? 'Table Booked Successfully' : 'Failed  To Book Table'}}
+        <span></span>
+      </h3>
+    </div>
+    <hr class="hr-orange">
+    <div class="row justify-content-between">
+      <h5 class="col-12 text-center text-secondary">{{getUserName()}}</h5>
+    </div>
+    <hr class="hr-orange">
+    <div class="text-orange row">
+      <p class="col-6"><i class="bi bi-calendar3 mr-3"></i><span class="text-secondary">{{data.date}} {{data.start_time |timeFormat}}</span></p>
+      <p class="col-6"><i class="bi bi-people mr-3"></i><span class="text-secondary">{{data.peopleCount}} Guests</span>
+      </p>
+    </div>
+    <div class="row justify-content-center">
+      <button class="col-6 btn btn-dark border-0 bg-orange text-center " (click)="Done()">Done</button>
+    </div>
+    <div *ngIf="data.status">
+      <hr class="hr-orange">
+      <p class="text-secondary text-style-italic" style="font-size: small">
+        Your table is reserved! Since you reserved your table with Dine in {{data.restaurant.name}}, your will
+        automatically receive 2% off your bill when you pay
+      </p>
+    </div>
+  </div>
+</div>

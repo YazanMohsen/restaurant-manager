@@ -15,6 +15,7 @@ import {RestaurantFormComponent} from "./restaurant-management/restaurant-form/r
 import {RestaurantsManagementComponent} from "./restaurant-management/restaurants-management.component";
 import {RestaurantAdminGuard} from "../AuthModule/restaurant-admin.guard";
 import {SystemAdminGuard} from "../AuthModule/system-admin.guard";
+import {TablesManagementComponent} from "./tables-management/tables-management.component";
 
 let appRoutes: Route[] = [
 
@@ -45,7 +46,16 @@ let appRoutes: Route[] = [
 
         ]
       },
-      {path: 'reservations', component: ReservationManagementComponent, canActivate: [RestaurantAdminGuard],},
+        {
+        path: 'tables', component: OrdersManagementComponent, canActivate: [RestaurantAdminGuard],
+        children: [
+          {path: '', component: TablesManagementComponent, canActivate: [RestaurantAdminGuard],},
+          {path: 'reservations', component: ReservationManagementComponent, canActivate: [RestaurantAdminGuard],},
+
+        ]
+      },
+
+
     ]
 
   },

@@ -16,7 +16,7 @@ export class RestaurantListComponent implements OnInit {
   restaurants: RestaurantModel[] = []
   searchValue: string = "";
   totalCount: number;
-  pageSize: number = 5;
+  pageSize: number = 6;
   isLoading: boolean;
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class RestaurantListComponent implements OnInit {
       (response: ResponseModel<RestaurantModel>) => {
         this.isLoading = false;
         this.restaurants = response.list;
-        this.totalCount = 20;
+        this.totalCount = response.total_count;
       }
     )
   }
