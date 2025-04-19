@@ -16,37 +16,38 @@
                data-bs-auto-close="true"
                class="nav-link px-0 align-middle text-white">
 
-              <i class="fs-4 bi-cake"></i> <span class="ms-2 d-none d-sm-inline">Meals</span> </a>
-            <ul class="ms-4 collapse nav flex-column show ms-2" id="meals" data-bs-parent="#menu">
+              <i class="fs-4 bi-book"></i> <span class="ms-2 d-none d-sm-inline">Menu</span> </a>
+            <ul class="ms-4 collapse nav flex-column  ms-2" id="meals" data-bs-parent="#menu">
               <li class="w-100">
                 <a routerLink="meals/add" class="nav-link text-white p-2"> <span
                   class="d-none d-sm-inline">Add Meal</span> </a>
               </li>
               <li>
                 <a routerLink="meals/all" class="nav-link text-white  p-2"> <span
-                  class="d-none d-sm-inline">My Meals</span> </a>
+                  class="d-none d-sm-inline">Meals</span> </a>
               </li>
             </ul>
           </li>
           <li *ngIf="isRestaurantAdmin()">
             <a routerLink="orders/all" class="nav-link px-0 align-middle text-white">
-              <i class="fs-5  bi-archive"></i> <span class="ms-2 d-none d-sm-inline">Orders</span></a>
+              <i class="fs-5  bi-box-seam"></i> <span class="ms-2 d-none d-sm-inline">Orders</span></a>
           </li>
           <li *ngIf="isRestaurantAdmin()">
             <a href="#tables"
                data-bs-toggle="collapse"
                data-bs-auto-close="true"
+               aria-expanded="false"
                class="nav-link px-0 align-middle text-white">
 
-              <i class="fs-4 bi-cake"></i> <span class="ms-2 d-none d-sm-inline">Tables Management</span> </a>
-            <ul class="ms-4 collapse nav flex-column show ms-2" id="tables" data-bs-parent="#menu">
+              <i class="fs-4  bi-calendar-check"></i> <span class="ms-2 d-none d-sm-inline">Reservations Management</span> </a>
+            <ul class="ms-4 collapse nav flex-column  ms-2" id="tables" data-bs-parent="#menu" >
               <li class="w-100">
                 <a routerLink="tables" class="nav-link px-0 align-middle text-white">
-                  <i class="fs-5 bi-table"></i> <span class="ms-2 d-none d-sm-inline">Tables</span></a>
+                  <i class="fs-5 "></i> <span class="ms-2 d-none d-sm-inline">Tables</span></a>
               </li>
               <li>
                 <a routerLink="tables/reservations" class="nav-link px-0 align-middle text-white">
-                  <i class="fs-5 bi-table"></i> <span class="ms-2 d-none d-sm-inline">Reservations</span></a>
+                  <i class="fs-5 "></i> <span class="ms-2 d-none d-sm-inline">Reservations</span></a>
               </li>
             </ul>
           </li>

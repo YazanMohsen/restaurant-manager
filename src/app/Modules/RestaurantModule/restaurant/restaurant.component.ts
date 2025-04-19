@@ -20,6 +20,7 @@ export class RestaurantComponent implements OnInit {
   meals: MealModel[] = []
   isLoading: boolean;
   people: number[] = [];
+  durations: number[] = [];
 
   constructor(
     private toastr: ToastrService,
@@ -32,6 +33,9 @@ export class RestaurantComponent implements OnInit {
   ) {
     for (let number = 1; number <= 20; number++)
       this.people.push(number);
+
+    for (let number = 1; number <= 6; number++)
+      this.durations.push(number);
   }
 
   ngOnInit(): void {
@@ -75,6 +79,7 @@ export class RestaurantComponent implements OnInit {
   peopleCount: number;
   date: string;
   time: string;
+  duration: number;
 
   setTime(time) {
     this.time = time
@@ -92,10 +97,14 @@ export class RestaurantComponent implements OnInit {
     // console.log(dateValue)
     this.dialog.open(ReservationDialogComponent, {
       width: '600px',
-      height: '400px',
-      data: {restaurant: this.restaurant, date: date, start_time: timeString, peopleCount: this.peopleCount}
+      height: '350px',
+      data: {
+        restaurant: this.restaurant,
+        date: date,
+        start_time: timeString,
+        duration: this.duration,
+        peopleCount: this.peopleCount}
     });
   }
-
 
 }

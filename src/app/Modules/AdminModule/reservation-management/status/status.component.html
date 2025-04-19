@@ -1,0 +1,8 @@
+<div *ngIf="params.data.status=='Approved'" class="text-green">Approved</div>
+<div *ngIf="params.data.status=='Rejected'" class="text-red">Rejected</div>
+<div *ngIf="params.data.status=='Pending'" class="row bg-none m-0">
+  <p class="col-6 text-decoration-underline pointer m-0 p-0 text-green"
+     (click)="updateStatus(params.data,'Approved')">Approve</p>
+  <p class="col-6 text-decoration-underline pointer m-0 text-red" (click)="updateStatus(params.data,'Rejected')">
+    Reject</p>
+</div>

@@ -3,7 +3,7 @@
 </div>
 
 <div class="row w-100 justify-content-center" *ngIf="restaurant && !isLoading">
-  <div class="col-7 p-4 m-4 shadow">
+  <div class="col-8 p-4 m-4 shadow">
     <div class="row align-items-center ">
       <h3 class="col-7 text-secondary pointer m-0" routerLink="/restaurants/all"><i
         class="bi bi-chevron-left fa-xs"></i>Go
@@ -45,25 +45,32 @@
     </div>
     <div class="row justify-content-around ">
 
-      <mat-form-field subscriptSizing="dynamic" class="col-3 p-0 ">
+      <mat-form-field subscriptSizing="dynamic" class="col-2 p-0 ">
         <mat-label>Select Date</mat-label>
         <input matInput [matDatepicker]="picker" [(ngModel)]="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <app-time-picker class="col-3 p-0 "
+      <app-time-picker class="col-2 p-0 "
                        (selectedTimeEmitter)="setTime($event);"
       ></app-time-picker>
 
-      <mat-form-field class="col-3 p-0 " subscriptSizing="dynamic" appearance="fill">
+      <mat-form-field class="col-2 p-0 " subscriptSizing="dynamic" appearance="fill">
         <mat-label>Guests</mat-label>
         <mat-select [(value)]="peopleCount">
           <mat-option *ngFor="let person of people" [value]="person">{{ person }}</mat-option>
         </mat-select>
       </mat-form-field>
+
+      <mat-form-field class="col-2 p-0 " subscriptSizing="dynamic" appearance="fill">
+        <mat-label>Duration</mat-label>
+        <mat-select [(value)]="duration">
+          <mat-option *ngFor="let duration of durations" [value]="duration">{{ duration }} hour</mat-option>
+        </mat-select>
+      </mat-form-field>
       <button class="col-2 btn btn-dark border-0 bg-orange text-white"
-              [disabled]="peopleCount==null || time==null || date==null "
+              [disabled]="peopleCount==null || time==null || date==null || duration==null "
               (click)="findReservation()">Find Slot
       </button>
     </div>

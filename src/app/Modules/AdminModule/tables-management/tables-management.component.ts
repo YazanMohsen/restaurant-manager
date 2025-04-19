@@ -92,17 +92,17 @@ export class TablesManagementComponent {
     detailGridOptions: {
       columnDefs: [
         {field: 'user.name',headerName: 'Client'},
+        {field: 'date', headerName: 'Date'},
         {field: 'start_time',headerName: 'Start Time'},
         {field: 'end_time',headerName: 'End Time'},
+        {field: 'status',headerName: 'Status'},
       ],
       defaultColDef: {flex: 1}
     },
     getDetailRowData: (params: any) => {
       this.reservationService.reservationsByTableId(null, null, params.data.id).subscribe(
         (response: ResponseModel<ReservationModel>) => {
-          // response.list.map(reservation=>{
-          //   reservation.user=reservation.user.name;
-          // })
+
           params.successCallback(response.list);
         }
       )

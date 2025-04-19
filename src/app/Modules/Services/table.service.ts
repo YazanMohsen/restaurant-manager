@@ -23,6 +23,14 @@ export class TableService {
       request['capacity'] = capacity
     return this.httpService.get('tables/search', request);
   }
+  availableTables(page: number, pageSize: number,reservationModel?: any) {
+    const request = {
+      page: (page + 1).toString(),
+      per_page: pageSize.toString(),
+      ...reservationModel // Spread the model directly into the params
+    };
+    return this.httpService.get('tables/available', request);
+  }
 
   saveTable(table: TableModel) {
     return this.httpService.post('tables', table);

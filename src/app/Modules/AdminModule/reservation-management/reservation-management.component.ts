@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {themeMaterial} from "ag-grid-enterprise";
 import {ResponseModel} from "../../Models/response.model";
 import {ReservationModel} from "../../Models/reservation.model";
-import {TableModel} from "../../Models/table.model";
 import {PageEvent} from "@angular/material/paginator";
-import {TablesFormDialog} from "../tables-management/tables-form-dialog/tables-form-dialog";
 import {ReservationService} from "../../Services/reservation.service";
 import {ToastrService} from "ngx-toastr";
+import {StatusComponent} from "./status/status.component";
+import {AuthService} from "../../Services/auth.service";
 
 @Component({
   selector: 'app-reservation-management',
@@ -17,15 +17,21 @@ export class ReservationManagementComponent {
 
   protected readonly themeMaterial = themeMaterial;
 
-constructor(
-  private toastr: ToastrService,
-  private reservationService:ReservationService) {
-}
+  constructor(
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private reservationService: ReservationService) {
+  }
+
   reservations: ReservationModel[] = [];
   isLoading: boolean = false;
   totalCount: number;
   pageSize: number = 5;
+
   ngOnInit(): void {
+    this.reservationService.getReservationPublisher().subscribe(
+      () => this.search(0, this.pageSize)
+    )
     this.search(0, this.pageSize)
   }
 
@@ -36,16 +42,12 @@ constructor(
 
   search(page?: number, pageSize?: number) {
     this.isLoading = true;
-    this.reservationService.searchReservation(page, pageSize).subscribe(
+    this.reservationService.searchReservation(page, pageSize, {restaurant_id: this.authService.getUser().restaurant_id}).subscribe(
       (response: ResponseModel<ReservationModel>) => {
         this.isLoading = false;
         this.reservations = response.list;
-        // this.reservations.map(reservation=>{
-        //   reservation.user=reservation.user.name;
-        //   reservation.table=reservation.table.number;
-        // })
         this.totalCount = response.total_count;
-        // this.rowData=this.tables;
+        console.log(this.reservations);
       }
       , (error) => {
         this.toastr.error(error.message, "Failed to Fetch Reservations");
@@ -55,13 +57,20 @@ constructor(
   }
 
 
-
-
   columnDefs = [
-    {field: 'user.name',headerName: 'Client'},
-    {field: 'start_time',headerName: 'Start Time'},
-    {field: 'end_time',headerName: 'End Time'},
-    {field: 'table.number',headerName: 'Table Number'},
+    {field: 'user.name', headerName: 'Client'},
+    {field: 'date', headerName: 'Date'},
+    {field: 'start_time', headerName: 'Start Time'},
+    {field: 'end_time', headerName: 'End Time'},
+    {field: 'table.number', headerName: 'Table Number'},
+    {
+      field: '',
+      cellRendererSelector: params => {
+        return {
+          component: StatusComponent,
+        };
+      },
+      headerName: 'Status'
+    },
   ];
-
 }

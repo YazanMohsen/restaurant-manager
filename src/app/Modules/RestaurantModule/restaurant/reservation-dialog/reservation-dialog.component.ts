@@ -15,7 +15,6 @@ import {ReservationResponseDialogComponent} from "../reservation-response-dialog
 })
 export class ReservationDialogComponent implements OnInit {
   isLoading = false;
-  durations: number[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -24,8 +23,6 @@ export class ReservationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
-    for (let number = 1; number <= 6; number++)
-      this.durations.push(number);
   }
 
   ngOnInit(): void {
@@ -35,12 +32,19 @@ export class ReservationDialogComponent implements OnInit {
   tables: TableModel[] = [];
   totalCount: number;
   pageSize: number = 5;
-  duration: number;
   table: number;
 
   private getTables(pageIndex, pageSize) {
     this.isLoading = true;
-    this.tableService.searchTables(pageIndex, pageSize, this.data.restaurant.id, this.data.peopleCount).subscribe(
+    this.tableService.availableTables(pageIndex, pageSize,
+      {
+        restaurant_id:this.data.restaurant.id,
+        start_time:this.data.start_time,
+        duration: Number(this.data.duration),
+        date:this.data.date,
+        people_count:this.data.peopleCount
+      }
+    ).subscribe(
       (response: ResponseModel<TableModel>) => {
         this.isLoading = false;
         this.tables = response.list;
@@ -58,7 +62,8 @@ export class ReservationDialogComponent implements OnInit {
   }
 
   reserve() {
-    const reservationModel = new ReservationModel(this.data.date,this.data.start_time,  Number(this.duration), this.table)
+    const reservationModel = new ReservationModel(this.data.date,this.data.start_time,
+      Number(this.data.duration), this.table)
     this.reservationService.reserve(reservationModel).subscribe(
       () => this.handleResponse(true),
       () => this.handleResponse(false)

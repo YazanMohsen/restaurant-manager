@@ -6,7 +6,7 @@
       #MealForm="ngForm"
       (ngSubmit)="onSubmit(MealForm.value)"
       class=" shadow  w-100 h-100 p-4  d-flex flex-column ">
-  <h4 class="text-center "> Meal Details</h4>
+  <h4 class="text-center text-secondary"> Meal Details</h4>
   <div class="row justify-content-around mb-5 mt-5 ">
     <div class="col-5">
     <div class="input-group mb-3 mt-3 ">
@@ -29,7 +29,7 @@
   </div>
 
     <div class="mb-5 mt-4 position-relative p-0 col-4  d-inline-block">
-      <img class=" shadow"  [src]="meal.image" width="415" height="300">
+      <img class=" shadow"  [src]="meal.image" width="420" height="300">
       <label for="image" class="position-relative  position-absolute bottom-0 start-0  m-0  gradient-input  ">
         <input type="file" class="d-none" name="image" ngModel id="image" required (change)="uploadImage($event)">
         <p class=" position-absolute  top-50 start-50 m-0 text-white translate-middle bg-orange p-2 ">Upload Image</p>

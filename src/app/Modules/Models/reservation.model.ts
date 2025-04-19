@@ -13,6 +13,10 @@ export class ReservationModel {
     public restaurant?: RestaurantModel,
     public user?:any,
     public table?:any,
+    public status?:any,
+    public restaurant_id?: number,
+    public people_count?: number,
+
   ) {
   }
 }

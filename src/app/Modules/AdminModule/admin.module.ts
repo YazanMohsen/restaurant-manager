@@ -27,6 +27,7 @@ import {AgGridModule} from "ag-grid-angular";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatCard} from "@angular/material/card";
 import {AllEnterpriseModule, ModuleRegistry} from "ag-grid-enterprise";
+import {StatusComponent} from "./reservation-management/status/status.component";
 ModuleRegistry.registerModules([AllEnterpriseModule]);
 @NgModule({
   declarations: [
@@ -43,8 +44,8 @@ ModuleRegistry.registerModules([AllEnterpriseModule]);
     RestaurantFormComponent,
     RestaurantDialogComponent,
     TablesManagementComponent,
-    TablesFormDialog
-  ],
+    TablesFormDialog,
+    StatusComponent ],
   imports: [
     BrowserModule,
     RouterModule,

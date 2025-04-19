@@ -1,13 +1,14 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from "./http.service";
-import {Subject} from "rxjs";
 import {AuthService} from "./auth.service";
 import {ToastrService} from "ngx-toastr";
-import {TableModel} from "../Models/table.model";
 import {ReservationModel} from "../Models/reservation.model";
+import {Subject, tap} from "rxjs";
+import {OrderModel} from "../Models/order.model";
 
 @Injectable({providedIn: "root"})
 export class ReservationService {
+  private reservationPublisher: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private toastr: ToastrService,
@@ -15,6 +16,9 @@ export class ReservationService {
     private httpService: HttpService) {
   }
 
+  getReservationPublisher() {
+    return this.reservationPublisher;
+  }
 
   searchReservation(page: number, pageSize: number, reservationModel?: any) {
     const params = {
@@ -35,6 +39,14 @@ export class ReservationService {
 
   reserve(reservation: ReservationModel) {
     return this.httpService.post('reservations', reservation);
+
+  }
+
+  update(id: number, reservation: any) {
+    return this.httpService.put('reservations/' + id, reservation).pipe(
+      tap(
+        () => this.reservationPublisher.next(true)
+      ));
 
   }
 

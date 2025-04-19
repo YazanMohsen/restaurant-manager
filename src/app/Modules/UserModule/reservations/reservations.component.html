@@ -20,16 +20,30 @@
             <div class="row align-items-center mb-3 m-1 shadow ">
               <div class="col-6 p-0 ">
                 <img width="300" height="200"
-                     [src]="reservation.restaurant.profile_image">
+                     [src]="reservation.table.restaurant.profile_image">
               </div>
               <div class="col-6">
-                <h6>{{reservation.restaurant.name}}</h6>
+                <h6>{{reservation.table.restaurant.name}}</h6>
                 <p class="col-12 p-0"><i class="bi bi-calendar3 text-orange mr-3"></i><span
                   class="text-secondary">{{reservation.date }} {{reservation.start_time|timeFormat}}-{{reservation.end_time |timeFormat}}</span>
                 </p>
                 <p class="col-6 p-0"><i class="bi bi-people mr-3 text-orange"></i><span
-                  class="text-secondary">2 Guests</span>
+                  class="text-secondary">{{reservation.table.capacity}} Guests</span>
                 </p>
+                <div>
+                  <div *ngIf="reservation.status=='Approved'" class="text-green">
+                    <p class="col-6 p-0"><i class="bi bi-check-circle mr-3 "></i><span
+                    class="text-secondary">{{reservation.status}}</span>
+                  </p></div>
+                  <div *ngIf="reservation.status=='Rejected'" class="text-red">
+                    <p class="col-6 p-0"><i class="bi bi-x-circle mr-3 "></i><span
+                    class="text-secondary">{{reservation.status}}</span>
+                  </p></div>
+                  <div *ngIf="reservation.status=='Pending'" class="row bg-none m-0">
+                    <p class="col-6 p-0"><i class="bi bi-arrow-repeat mr-3 text-orange"></i><span
+                    class="text-secondary">{{reservation.status}}</span>
+                  </p></div>
+                </div>
               </div>
             </div>
           </div>

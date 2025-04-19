@@ -51,19 +51,6 @@ export class OrderManagementListComponent implements OnInit {
     this.search(event.pageIndex, event.pageSize);
 
   }
-
-  // updateStatus(order: OrderModel) {
-  //   this.orderService.updateOrder(order.id, order).subscribe(() => {
-  //     this.search(0, this.pageSize);
-  //     this.toastr.success("", "Order Updated Successfully")
-  //   }, (error) => {
-  //     this.toastr.error(error.message, "Failed to Update Orded")
-  //   })
-  //
-  // }
-
-  function
-
   updateStatus(event: any) {
     const order = event.data;
     this.orderService.updateOrder(order.id, order).subscribe(() => {
