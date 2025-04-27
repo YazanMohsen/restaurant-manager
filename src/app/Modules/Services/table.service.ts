@@ -37,11 +37,6 @@ export class TableService {
 
   }
 
-  getTable(id: number) {
-    return this.httpService.get('tables/' + id)
-
-  }
-
   updateTable(table: TableModel) {
     return this.httpService.put('tables/' + table.id, table).subscribe(() => {
       this.toastr.success("", "Table Updated Successfully");

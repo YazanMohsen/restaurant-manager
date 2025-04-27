@@ -29,15 +29,11 @@ export class ManagerService {
     this.httpService.post('restaurants', restaurant).subscribe(() => {
         this.toastr.success("Wait for Admin Approve", "Registered Successfully");
       }, (error) => {
-        this.toastr.error(error.message, "Failed Register Restaurant");
+        this.toastr.error(error, "Failed Register Restaurant");
       }
     );
   }
 
-  updateRestaurant(restaurant: any) {
-    this.httpService.put('restaurants', restaurant).subscribe(() => {
-    });
-  }
 
   updateMeal(meal: any) {
     this.httpService.put('items/' + meal.id, meal).subscribe(() => {
@@ -59,6 +55,5 @@ export class ManagerService {
       this.updateMeal(meal);
     else
       this.addMeal(meal)
-    // this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 }

@@ -6,6 +6,7 @@ import {ReservationService} from "../../Services/reservation.service";
 import {ReservationModel} from "../../Models/reservation.model";
 import {PageEvent} from "@angular/material/paginator";
 import {AuthService} from "../../Services/auth.service";
+import {themeMaterial} from "ag-grid-enterprise";
 
 @Component({
   selector: 'app-reservations',
@@ -42,4 +43,6 @@ export class ReservationsComponent {
     this.search(event.pageIndex, event.pageSize);
 
   }
+
+  protected readonly themeMaterial = themeMaterial;
 }

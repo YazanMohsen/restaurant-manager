@@ -27,15 +27,11 @@
     <hr class="hr-orange">
     <div class="row mb-3">
       <div class="col-6">
-        <div class=""><i class="fa fa-location text-orange"></i> {{restaurant.location}} |
-          <a href="#" class="fa-bolder text-dark fs-bold"><i class="bi bi-send-arrow-up-fill text-orange"></i> Get
-            Direction</a>
+        <div class=""><i class="fa fa-location text-orange"></i> {{restaurant.location}}
         </div>
-        <div class="mt-2"><i class="fa fa-clock text-orange"></i>  {{restaurant.time}}</div>
         <div class="mt-2  pointer" routerLink="/restaurants/menu"
              [queryParams]="{restaurantId:restaurant.id,restaurantName:restaurant.name}"
-
-        ><i class="bi bi-journal text-orange"></i> Show Menu
+        ><i class="bi bi-journal text-orange pointer"></i> Show Menu
         </div>
       </div>
       <div class="col-6 row">

@@ -28,6 +28,8 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatCard} from "@angular/material/card";
 import {AllEnterpriseModule, ModuleRegistry} from "ag-grid-enterprise";
 import {StatusComponent} from "./reservation-management/status/status.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 ModuleRegistry.registerModules([AllEnterpriseModule]);
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ ModuleRegistry.registerModules([AllEnterpriseModule]);
     RestaurantDialogComponent,
     TablesManagementComponent,
     TablesFormDialog,
-    StatusComponent ],
+    StatusComponent,
+    DashboardComponent],
   imports: [
     BrowserModule,
     RouterModule,
@@ -61,7 +64,8 @@ ModuleRegistry.registerModules([AllEnterpriseModule]);
     MatGridTile,
     MatToolbar,
     MatCard,
-    AgGridModule
+    AgGridModule,
+    NgxChartsModule
   ],
   exports:[
   ]

@@ -1,0 +1,51 @@
+<div *ngIf="isLoading" class="min-vh-100 h-100 d-flex justify-content-center align-items-center ">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading" class=" d-flex flex-column p-5 justify-content-between">
+  <div>
+    <h3 class="text-secondary m-3"> {{topRatedChart.title}}</h3>
+    <div class="row align-items-center" *ngIf="!isLoading">
+      <ngx-charts-bar-vertical
+        class="col-8"
+        [view]="[700, 400]"
+        [results]="topRatedChart.data"
+        [scheme]="'cool'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="topRatedChart.XTitle"
+        [yAxisLabel]="topRatedChart.YTitle"
+        [roundEdges]="true">
+      </ngx-charts-bar-vertical>
+      <div class="col-4 bg-dark text-light text-center shadow p-3" role="alert">
+        <strong> {{topRatedChart.sideTitle}}</strong>
+        <p>{{topRatedChart.sideContent}}</p>
+      </div>
+
+    </div>
+  </div>
+  <div>
+    <h3 class="text-secondary m-3"> {{secondChart.title}}</h3>
+    <div class="row align-items-center" *ngIf="!isLoading">
+      <ngx-charts-bar-vertical
+        class="col-8"
+        [view]="[700, 400]"
+        [results]="secondChart.data"
+        [scheme]="'cool'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="secondChart.XTitle"
+        [yAxisLabel]="secondChart.YTitle"
+        [roundEdges]="true">
+      </ngx-charts-bar-vertical>
+      <div class="col-4 bg-dark text-light text-center shadow p-3" role="alert">
+        <strong> {{secondChart.sideTitle}}</strong>
+        <p>{{secondChart.sideContent}}</p>
+      </div>
+
+    </div>
+  </div>
+</div>

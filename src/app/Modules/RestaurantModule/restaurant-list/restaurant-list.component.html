@@ -2,7 +2,7 @@
 <div class=" p-4">
   <div class="mb-3 input-group row">
     <h3 class="col-6 text-red m-0 ">Our Restaurants</h3>
-    <input type="text" class="col-6 form-control border-top-0 border-right-0 border-left-0 " (input)="search()"
+    <input type="text" class="col-6 form-control border-top-0 border-right-0 border-left-0 " (input)="search(0,pageSize)"
            [(ngModel)]="searchValue" placeholder="Search For Your Favorite Restaurant">
     <span class="input-group-text col-2 border-0 bg-transparent"><i class="bi bi-search"></i></span>
   </div>

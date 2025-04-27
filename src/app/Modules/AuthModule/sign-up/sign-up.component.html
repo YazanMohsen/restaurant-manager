@@ -18,9 +18,10 @@
       <button class="btn btn-primary pr-4 pl-4 " type="submit" [disabled]="signInForm.invalid">Sign Up</button>
     </div>
     <div class="mb-3 row">
-      <p>Already have an account on RestaurantManger? <a
-        routerLink="/auth/sign-in"
-        class="text-style-underline" type="button">Sign in</a></p>
+      <p>
+        Already part of the  <span class="text-orange">{{ApplicationEnum.Name}}</span>  family? Welcome back!
+        <a routerLink="/auth/sign-in" class="text-style-underline" type="button">Log in</a>
+        now to explore new flavors, offers, and personalized recommendations!</p>
     </div>
   </div>
   <div class="col-8  p-0">

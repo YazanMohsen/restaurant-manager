@@ -23,6 +23,7 @@ export class RestaurantManagementComponent implements OnInit {
   searchValue: string = "";
   totalCount: number;
   pageSize: number = 5;
+  currentPage: number ;
   isLoading: boolean;
 
   search(page?: number, pageSize?: number) {
@@ -41,6 +42,7 @@ export class RestaurantManagementComponent implements OnInit {
   }
 
   paginate(event: PageEvent) {
+    this.currentPage=event.pageIndex;
     this.search(event.pageIndex, event.pageSize);
 
   }
@@ -48,7 +50,7 @@ export class RestaurantManagementComponent implements OnInit {
   reject(restaurant: RestaurantModel) {
     this.restaurantService.delete(restaurant.id).subscribe(
       () => {
-        this.search(0, this.pageSize);
+        this.search(this.currentPage, this.pageSize);
         this.toastr.success(restaurant.name + " is Rejected", "Rejected Successfully")
       }, (error) => {
         this.toastr.error(error.message, "Failed to Reject")
@@ -74,7 +76,7 @@ export class RestaurantManagementComponent implements OnInit {
     restaurant.status = 'Approved';
     this.restaurantService.update(restaurant).subscribe(
       () => {
-        this.search(0, this.pageSize);
+        this.search(this.currentPage, this.pageSize);
         this.toastr.success(restaurant.name + " is Approved", "Approved Successfully")
       }, (error) => {
         this.toastr.error(error.message, "Failed to Approve")

@@ -24,6 +24,7 @@ export class OrderManagementListComponent implements OnInit {
   orders: OrderModel[] = []
   isLoading: boolean;
   totalCount: number;
+  currentPage: number;
   pageSize: number = 5;
   searchValue: string = "";
 
@@ -48,13 +49,14 @@ export class OrderManagementListComponent implements OnInit {
   }
 
   paginate(event: PageEvent) {
+    this.currentPage=event.pageIndex;
     this.search(event.pageIndex, event.pageSize);
 
   }
   updateStatus(event: any) {
     const order = event.data;
     this.orderService.updateOrder(order.id, order).subscribe(() => {
-      this.search(0, this.pageSize);
+      this.search(this.currentPage, this.pageSize);
       this.toastr.success("", "Order Updated Successfully")
     }, (error) => {
       this.toastr.error(error.message, "Failed to Update Orded")

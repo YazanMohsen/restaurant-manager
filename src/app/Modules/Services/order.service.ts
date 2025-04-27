@@ -19,7 +19,7 @@ export class OrderService {
     private toastr: ToastrService,
     private authService: AuthService,
     private httpService: HttpService) {
-    if (AuthService.getCurrentUser().role === Roles.User)
+    if (AuthService.getCurrentUser() != null && AuthService.getCurrentUser().role === Roles.User)
       this.initCart();
 
   }
@@ -39,10 +39,6 @@ export class OrderService {
   }
 
 
-  getOrders() {
-    return this.httpService.get('orders');
-  }
-
   getUserOrders() {
     return this.httpService.get('orders/by-user');
   }
@@ -56,19 +52,24 @@ export class OrderService {
       (response: any) => {
         this.cart = OrderModel.buildCart(response.list)
         this.cartPublisher.next(this.cart);
+        this.loaderPublisher.next(false);
       }
     );
 
   }
 
   addToCart(cartItem: MealModel) {
-    let item = this.cart.order_items.filter((item) => cartItem.item_id == item.item_id)[0];
+    let item;
+    if (this.cart && this.cart.order_items)
+      item = this.cart.order_items.filter((item) => cartItem.item_id == item.item_id)[0];
     if (item) {
       item.count++;
       this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
-        this.toastr.success("Check Your Cart", "Added Successfully");
+        this.toastr.success("Check Your Cart", "You Cart Updated Successfully");
         this.initCart()
+      }, (error) => {
         this.loaderPublisher.next(false);
+        this.toastr.error(error.message, "Failed to Update Cart ");
       })
       return
     }
@@ -79,17 +80,19 @@ export class OrderService {
       this.addOrder();
     else
       this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
-        this.initCart()
-        this.loaderPublisher.next(false);
-        this.toastr.success("", "You Cart Updated Successfully");
-      })
+          this.initCart()
+          this.toastr.success("", "You Cart Updated Successfully");
+        }, (error) => {
+          this.loaderPublisher.next(false);
+          this.toastr.error(error.message, "Failed to Update Cart ");
+        }
+      )
   }
 
   addOrder() {
     this.httpService.post('orders', this.cart).subscribe(() => {
       this.initCart()
-      this.loaderPublisher.next(false);
-      this.toastr.success("Check Your Cart", "Added Successfully");
+      this.toastr.success("Check Your Cart", "You Cart Updated Successfully");
     }, (error) => {
       this.toastr.error(error.message, "Failed to Add to Cart");
       this.loaderPublisher.next(false);
@@ -101,8 +104,8 @@ export class OrderService {
   }
 
   saveOrder() {
-    this.cart.status = OrderStatus.Pending;
-    this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
+    // this.cart.status = OrderStatus.Pending;
+    this.submitCart(this.cart.orderId).subscribe(() => {
       this.initCart()
       this.loaderPublisher.next(false);
       this.toastr.success("Check your Orders", "You Order Saved Successfully");
@@ -130,7 +133,6 @@ export class OrderService {
     this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
       this.initCart()
       this.toastr.success("", "You Cart Updated Successfully");
-      this.loaderPublisher.next(false);
     }, (error) => {
       this.toastr.error(error.message, "Failed to Update Cart");
       this.loaderPublisher.next(false);
@@ -139,12 +141,14 @@ export class OrderService {
 
   decreaseCount(id: number) {
     let cartItem: MealModel = this.cart.order_items[id];
-    if (cartItem.count == 1) return;
+    if (cartItem.count == 1) {
+      this.loaderPublisher.next(false);
+      return;
+    }
     cartItem.count--;
     this.updateOrder(this.cart.orderId, this.cart).subscribe(() => {
       this.initCart()
       this.toastr.success("", "You Cart Updated Successfully");
-      this.loaderPublisher.next(false);
     }, (error) => {
       this.toastr.error(error.message, "Failed to Update Cart");
       this.loaderPublisher.next(false);
@@ -155,11 +159,16 @@ export class OrderService {
   searchOrders(searchValue: string, page: number, pageSize: number, restaurantId: number) {
     return this.httpService.get('orders/search',
       {
-      name: searchValue,
-      restaurant_id: restaurantId,
-      page: page + 1,
-      per_page: pageSize
-    }
+        name: searchValue,
+        restaurant_id: restaurantId,
+        page: page + 1,
+        per_page: pageSize
+      }
     );
+  }
+
+  private submitCart(id: number) {
+    return this.httpService.put('orders/submit-cart/' + id, {});
+
   }
 }

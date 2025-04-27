@@ -4,6 +4,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../Services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {ApplicationEnum} from "../../Constants/Application.enum";
 
 @Component({
   selector: 'app-sign-up',
@@ -44,4 +45,5 @@ export class SignUpComponent {
     );
   };
 
+    protected readonly ApplicationEnum = ApplicationEnum;
 }

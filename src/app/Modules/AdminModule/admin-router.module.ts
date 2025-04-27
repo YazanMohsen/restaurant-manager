@@ -16,21 +16,17 @@ import {RestaurantsManagementComponent} from "./restaurant-management/restaurant
 import {RestaurantAdminGuard} from "../AuthModule/restaurant-admin.guard";
 import {SystemAdminGuard} from "../AuthModule/system-admin.guard";
 import {TablesManagementComponent} from "./tables-management/tables-management.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 let appRoutes: Route[] = [
 
   {
     path: 'restaurant-manager', component: AdminHomeComponent, canActivate: [RestaurantAdminGuard],
-    children: [
-      // {
-      //   path: 'restaurants', component: RestaurantsManagementComponent,
-      //   children: [
-      //     {path: 'all', component: RestaurantManagementComponent, canActivate: [SystemAdminGuard],},
-      //     {path: 'add', component: RestaurantFormComponent,},
-      //
-      //   ]
-      // },
+    children: [{
+      path: 'dashboard', component: DashboardComponent, canActivate: [RestaurantAdminGuard]}
+      ,
       {
+
         path: 'meals', component: MealsManagementComponent, canActivate: [RestaurantAdminGuard],
         children: [
           {path: 'all', component: MealsComponent,},
@@ -62,6 +58,8 @@ let appRoutes: Route[] = [
   {
     path: 'system', component: AdminHomeComponent, canActivate: [SystemAdminGuard],
     children: [
+      {
+        path: 'dashboard', component: DashboardComponent, canActivate: [SystemAdminGuard]},
       {
         path: 'restaurants', component: RestaurantsManagementComponent,
         children: [

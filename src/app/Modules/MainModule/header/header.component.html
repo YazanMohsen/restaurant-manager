@@ -29,10 +29,10 @@
           </div>
           <div *ngIf="authenticated && isClient()" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 <!--            <a class="dropdown-item" routerLink="/user/reservations">Profile</a>-->
-            <a class="dropdown-item" routerLink="/user/cart">Cart</a>
-            <a class="dropdown-item" routerLink="/user/orders/list">Orders </a>
-            <a class="dropdown-item" routerLink="/user/reservations">Reservations</a>
-            <a class="dropdown-item pointer" (click)="onSignOut()">Sign Out </a>
+            <a class="dropdown-item" routerLink="/user/cart"><i class="bi-cart"></i> Cart</a>
+            <a class="dropdown-item" routerLink="/user/orders/list"><i class="bi-clipboard-check"></i> Orders </a>
+            <a class="dropdown-item" routerLink="/user/reservations"><i class="bi-bookmark"></i> Reservations</a>
+            <a class="dropdown-item pointer" (click)="onSignOut()"><i class="bi-door-open"></i> Sign Out </a>
           </div>
 
         </li>

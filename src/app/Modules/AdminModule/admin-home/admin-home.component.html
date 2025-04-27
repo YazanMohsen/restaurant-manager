@@ -1,16 +1,24 @@
 <div class="  w-100 ">
   <div style="min-height:90.8vh" class=" row flex-nowrap p-0 m-0">
-    <div  class=" col-auto col-md-3 col-xl-2 bg-dark" style="background:#FFDB58">
+    <div class=" col-auto col-md-3 col-xl-2 bg-dark" style="background:#FFDB58">
       <div class=" d-flex flex-column align-items-center align-items-sm-start  text-white ">
         <ul class=" nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isRestaurantAdmin()">
             <a
-              routerLinkActive="active"
-              routerLink="/admin/restaurant-manage" class="nav-link align-middle px-0 text-white">
+              routerLink="/admin/restaurant-manager/dashboard" class="nav-link align-middle px-0 text-white">
               <i class="fs-4 bi-house"></i> <span class="ms-2 d-none d-sm-inline">Dashboard</span>
             </a>
           </li>
+          <li class="nav-item" *ngIf="isSystemAdmin()">
+            <a
+              routerLink="/admin/system/dashboard" class="nav-link align-middle px-0 text-white">
+              <i class="fs-4 bi-house"></i> <span class="ms-2 d-none d-sm-inline">Dashboard</span>
+            </a>
+          </li>
+
+
           <li *ngIf="isRestaurantAdmin()">
+
             <a href="#meals"
                data-bs-toggle="collapse"
                data-bs-auto-close="true"
@@ -39,8 +47,9 @@
                aria-expanded="false"
                class="nav-link px-0 align-middle text-white">
 
-              <i class="fs-4  bi-calendar-check"></i> <span class="ms-2 d-none d-sm-inline">Reservations Management</span> </a>
-            <ul class="ms-4 collapse nav flex-column  ms-2" id="tables" data-bs-parent="#menu" >
+              <i class="fs-4  bi-calendar-check"></i> <span
+              class="ms-2 d-none d-sm-inline">Reservations Management</span> </a>
+            <ul class="ms-4 collapse nav flex-column  ms-2" id="tables" data-bs-parent="#menu">
               <li class="w-100">
                 <a routerLink="tables" class="nav-link px-0 align-middle text-white">
                   <i class="fs-5 "></i> <span class="ms-2 d-none d-sm-inline">Tables</span></a>
@@ -53,6 +62,7 @@
           </li>
 
           <li *ngIf="isSystemAdmin()">
+
             <a routerLink="restaurants/all" class="nav-link px-0 align-middle text-white">
               <i class="fs-5 bi-building"></i> <span class="ms-2 d-none d-sm-inline">Restaurants</span></a>
           </li>

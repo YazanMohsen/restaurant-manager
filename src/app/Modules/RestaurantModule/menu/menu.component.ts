@@ -36,10 +36,12 @@ export class MenuComponent implements OnInit, OnDestroy {
   actionLoaderListener: Subscription;
   totalCount: number;
   pageSize: number = 6;
+  currentPage: number;
 
   searchValue: string = "";
 
   ngOnInit(): void {
+    this.orderService.initCart();
     this.actionLoaderListener = this.orderService.getLoaderPublisher().subscribe(
       (loading) => {
         this.actionLoader = loading;
@@ -75,6 +77,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   paginate(event: PageEvent) {
+    this.currentPage = event.pageIndex;
     this.search(event.pageIndex, event.pageSize);
   }
 
@@ -95,12 +98,12 @@ export class MenuComponent implements OnInit, OnDestroy {
       return;
     }
     this.restaurantService.addMealRate(id, rate).subscribe(
-      ()=>{
-        this.toastr.success("Rated Successfully ","");
-        this.search(0, this.pageSize);
+      () => {
+        this.toastr.success("Rated Successfully ", "");
+        this.search(this.currentPage, this.pageSize);
       },
-      (error)=>{
-        this.toastr.error(error.message,'Failed To Rate');
+      (error) => {
+        this.toastr.error(error.message, 'Failed To Rate');
 
       },
     )

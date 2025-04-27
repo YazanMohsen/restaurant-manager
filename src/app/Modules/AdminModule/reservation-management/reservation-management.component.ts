@@ -27,15 +27,17 @@ export class ReservationManagementComponent {
   isLoading: boolean = false;
   totalCount: number;
   pageSize: number = 5;
+  currentPage: number ;
 
   ngOnInit(): void {
     this.reservationService.getReservationPublisher().subscribe(
-      () => this.search(0, this.pageSize)
+      () => this.search(this.currentPage, this.pageSize)
     )
     this.search(0, this.pageSize)
   }
 
   paginate(event: PageEvent) {
+    this.currentPage=event.pageIndex;
     this.search(event.pageIndex, event.pageSize);
 
   }

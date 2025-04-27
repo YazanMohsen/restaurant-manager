@@ -19,10 +19,9 @@
         <th scope="col">Count</th>
         <th scope="col">Unit Price</th>
         <th scope="col">Total Price</th>
-        <th scope="col">Action</th>
+        <th scope="col"></th>
         </thead>
         <tbody class="text-center">
-        <!--      <tr *ngFor="let i of [].constructor(2)">-->
         <tr *ngFor="let cartItem of cart.order_items;let id=index">
           <th class="align-middle" scope="row">{{cartItem.item.id}}</th>
           <th class="align-middle" scope="row">{{cartItem.item.name}}</th>
@@ -44,10 +43,9 @@
         </tbody>
       </table>
       <div class="text-center">
-        <h3>Total price</h3>
-        <h6>{{cart.total_price}}</h6>
+          <h6 class="text-dark">Total Price<span class="fs-6 tex-secondary">  {{cart.total_price}}</span></h6>
       </div>
-      <div class="row justify-content-center p-2 w-100">
+      <div class="row justify-content-center m-0 p-2 w-100">
         <button class="btn btn-dark border-0 bg-orange text-white col-3 mr-3" (click)="onSubmit()"> Submit Cart</button>
       </div>
     </div>

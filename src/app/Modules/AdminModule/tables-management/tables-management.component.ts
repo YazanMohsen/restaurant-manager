@@ -42,7 +42,10 @@ export class TablesManagementComponent {
   totalCount: number;
   pageSize: number = 5;
 
+  currentPage:number;
   paginate(event: PageEvent) {
+    this.currentPage=event.pageIndex;
+
     this.search(event.pageIndex, event.pageSize);
 
   }
@@ -71,21 +74,16 @@ export class TablesManagementComponent {
     });
     dialog.afterClosed().subscribe(
       () => {
-        this.search(0, this.pageSize)
+        this.search(this.currentPage, this.pageSize)
       }
     )
   }
 
-  updateStatus() {
-    this.tableService.updateTable(this.table);
-
-  }
 
 
   columnDefs = [
     {field: 'number',headerName: 'Table Number'},
     {field: 'capacity',headerName: 'Table Capacity'},
-    {field: 'status',headerName: 'Reservation Status'},
     {field: 'expand', cellRenderer: 'agGroupCellRenderer', headerName: 'Reservations'}
   ];
   detailCellRendererParams = {

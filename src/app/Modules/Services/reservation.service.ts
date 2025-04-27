@@ -36,6 +36,9 @@ export class ReservationService {
     };
     return this.httpService.get('reservations/table/' + $tableId);
   }
+  restaurantsVisits() {
+    return this.httpService.get('reservations/restaurants-visits');
+  }
 
   reserve(reservation: ReservationModel) {
     return this.httpService.post('reservations', reservation);

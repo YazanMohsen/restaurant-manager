@@ -13,7 +13,7 @@
     </div>
     <ng-template #reservationsView>
       <div class="  align-items-center ">
-        <h3 class="p-0">History and Recent Bookings</h3>
+        <h3 class="w-100  text-secondary p-0 "><i class="bi bi-clock-history"></i> History and Recent Bookings </h3>
         <hr class="hr-orange ">
         <div class="row ">
           <div *ngFor="let reservation of reservations" class="col-6">
@@ -53,11 +53,10 @@
     </ng-template>
 
   </div>
-
-  <mat-paginator  class="bg-dark" [length]="totalCount"
-                  [pageSizeOptions]="[1, 5, 10]"
-                  (page)="paginate($event)"
-                  [pageSize]="pageSize"
+  <mat-paginator *ngIf="totalCount > 0" class="bg-dark" [length]="totalCount"
+                 [pageSizeOptions]="[1, 5, 10]"
+                 (page)="paginate($event)"
+                 [pageSize]="pageSize"
   ></mat-paginator>
 
 </div>

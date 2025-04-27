@@ -39,8 +39,8 @@ export class TablesFormDialog {
 
   startLoading() {
     this.isLoading = true;
-    if(!this.table.number || !this.table.capacity) {
-      this.toastr.info( "Please Enter Table Number and Capacity","Invalid Data",);
+    if(!this.table.number || !this.table.capacity|| this.table.capacity>20) {
+      this.toastr.info( "Please Enter A Valid Table Number and Capacity","Invalid Data",);
       this.isLoading = false;
       return;
     }

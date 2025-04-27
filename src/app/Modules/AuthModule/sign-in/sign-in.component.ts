@@ -3,6 +3,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../Services/auth.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {ApplicationEnum} from "../../Constants/Application.enum";
 
 @Component({
   selector: 'app-sign-in',
@@ -35,9 +36,9 @@ export class SignInComponent {
         if (this.authService.isClient())
           this.router.navigate(['/restaurants/all']);
         else if (this.authService.isRestaurantAdmin())
-          this.router.navigate(['/admin/restaurant-manager']);
+          this.router.navigate(['/admin/restaurant-manager/dashboard']);
         else if (this.authService.isSystemAdmin())
-          this.router.navigate(['/admin/system']);
+          this.router.navigate(['/admin/system/dashboard']);
       },
       (error)=>{
         this.toastr.error(error.message,'Failed To Login ');
@@ -46,4 +47,5 @@ export class SignInComponent {
     );
   };
 
+    protected readonly ApplicationEnum = ApplicationEnum;
 }
