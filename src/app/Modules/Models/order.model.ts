@@ -1,6 +1,7 @@
 import {MealModel} from "./meal.model";
 import {OrderStatus} from "../Constants/order-status.enum";
 import {AuthService} from "../Services/auth.service";
+import {UserModel} from "./user.model";
 
 export class OrderModel {
   constructor(public user_id: number,
@@ -11,6 +12,7 @@ export class OrderModel {
               public orderId?: number,
               public created_at?: string,
               public id?: number,
+              public user?: UserModel,
   ) {
   }
 
