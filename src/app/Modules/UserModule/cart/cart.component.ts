@@ -2,14 +2,17 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from "../../Services/order.service";
 import {OrderModel} from "../../Models/order.model";
 import {Subscription} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {UserInfoDialog} from "./user-info-dialog/user-info-dialog";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit ,OnDestroy{
+export class CartComponent implements OnInit, OnDestroy {
   constructor(
+    private dialog: MatDialog,
     private orderService: OrderService) {
   }
 
@@ -21,7 +24,7 @@ export class CartComponent implements OnInit ,OnDestroy{
   ngOnInit(): void {
 
     this.isLoading = true;
-    this.actionLoaderListener= this.orderService.getLoaderPublisher().subscribe(
+    this.actionLoaderListener = this.orderService.getLoaderPublisher().subscribe(
       (loading) => {
         this.actionLoader = loading;
       }
@@ -34,9 +37,24 @@ export class CartComponent implements OnInit ,OnDestroy{
     );
   }
 
+  // onSubmit() {
+  //   this.orderService.getLoaderPublisher().next(true);
+  //   this.orderService.saveOrder();
+  // }
   onSubmit() {
-    this.orderService.getLoaderPublisher().next(true);
-    this.orderService.saveOrder();
+    const dialog = this.dialog.open(UserInfoDialog, {
+      width: '450px',
+      height: '300px',
+    });
+
+    dialog.afterClosed().subscribe(
+      (userInfo) => {
+        if (userInfo) {
+          this.orderService.getLoaderPublisher().next(true);
+          this.orderService.saveOrder(userInfo);
+        }
+      }
+    )
   }
 
 
@@ -56,7 +74,9 @@ export class CartComponent implements OnInit ,OnDestroy{
     this.orderService.getLoaderPublisher().next(true);
     this.orderService.decreaseCount(id);
 
-  }  ngOnDestroy(): void {
+  }
+
+  ngOnDestroy(): void {
     this.actionLoaderListener.unsubscribe();
   }
 

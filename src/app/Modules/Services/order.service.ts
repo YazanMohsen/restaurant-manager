@@ -103,9 +103,8 @@ export class OrderService {
     return this.httpService.put('orders/' + id, order);
   }
 
-  saveOrder() {
-    // this.cart.status = OrderStatus.Pending;
-    this.submitCart(this.cart.orderId).subscribe(() => {
+  saveOrder(userInfo) {
+    this.submitCart(this.cart.orderId,userInfo).subscribe(() => {
       this.initCart()
       this.loaderPublisher.next(false);
       this.toastr.success("Check your Orders", "You Order Saved Successfully");
@@ -167,8 +166,12 @@ export class OrderService {
     );
   }
 
-  private submitCart(id: number) {
-    return this.httpService.put('orders/submit-cart/' + id, {});
+  private submitCart(id: number,userInfo) {
+    return this.httpService.put('orders/submit-cart/' + id, {
+      'customer_phone_number':userInfo.customer_phone_number,
+      'customer_location':userInfo.customer_location
+    });
 
   }
+
 }

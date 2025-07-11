@@ -13,6 +13,8 @@ export class OrderModel {
               public created_at?: string,
               public id?: number,
               public user?: UserModel,
+              public customer_phone_number?: string,
+              public customer_location?: string,
   ) {
   }
 
@@ -25,6 +27,7 @@ export class OrderModel {
       [],
       null,
       null,
+
     )
   }
 

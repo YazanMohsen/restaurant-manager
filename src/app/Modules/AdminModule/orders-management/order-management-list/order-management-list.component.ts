@@ -69,7 +69,9 @@ export class OrderManagementListComponent implements OnInit {
   columnDefs = [
     {field: 'id', headerName: 'Order Number'},
     {field: 'created_at', headerName: 'Order Date'},
-    {field: 'user.name', headerName: 'Client'},
+    {field: 'user.name', headerName: 'Customer Name'},
+    {field: 'customer_phone_number', headerName: 'Customer Phone '},
+    {field: 'customer_location', headerName: 'Customer Location'},
     {
       field: 'status',
       editable: true,
